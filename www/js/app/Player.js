@@ -33,8 +33,7 @@ define([], function() {
             sleeping: false,
             cursed: false
         };
-            /*player.condition.health*/
-        
+
         
 		this.pos = {
 			x: 0,
