@@ -80,8 +80,10 @@ define(["jquery"], function($) {
                 var player = arrPlayers[ playerIdx ];
                 var playerDiv = $( '<div id="player' + playerIdx + '"></div>' );
                 $( playerDiv ).append( '<div class="player-name">' + player.stat.name + '</div>' );
-                $( playerDiv ).append( '<div class="max-hp"><div class="current-hp" style="width:' + 100 * player.condition.health / player.attribute.vitality + '%;"></div></div>' );
-                $( '#playerBar' ).append( playerDiv );
+                $( playerDiv ).append( '<div class="max-hp"><div class="current-hp" style="width:' + 100 * (player.condition.health / player.attribute.vitality) + '%;"></div><div class="current-mp-text">'+player.condition.health+'/'+ player.attribute.vitality+'</div></div>' );
+                $( playerDiv ).append( '<div class="max-mp"><div class="current-mp" style="width:' + 100 * (player.condition.mana / player.attribute.wisdom) + '%;"></div><div class="current-mp-text">'+player.condition.mana+'/'+ player.attribute.wisdom+'</div></div>' );
+                $( '#playerBar' ).append( playerDiv )
+;
             }
         };
 

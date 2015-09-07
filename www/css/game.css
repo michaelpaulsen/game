@@ -31,18 +31,33 @@ body {
 	width: 17vw;
 	width: 17vmin;
 }
-#playerBar .max-hp {
+#playerBar .max-hp,
+#playerBar .max-mp {
     border: 1px solid red;
     position:relative;
     height: 2vw;
     height: 2vmin;
     width: 90%;
-    margin: 0 auto;
+    margin: 1px auto;
 }
-#playerBar .current-hp {
+#playerBar .current-hp,
+#playerBar .current-mp {
     background-color:red;
     position:absolute;
     height: 100%;
+}
+#playerBar .max-mp {
+    border-color: blue;
+}
+#playerBar .current-mp {
+    background-color:blue;
+}
+#playerBar .current-hp-text,
+#playerBar .current-mp-text
+{
+    position: absolute;
+    color: white;
+    width: 100%;
 }
 #mapGrid {
 	border: 1px solid blue;
