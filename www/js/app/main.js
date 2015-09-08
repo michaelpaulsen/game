@@ -7,16 +7,22 @@ define([
 	'app/Input'
 ], function($, util, Screen, MapWorld, Player, Input) {
 
-	var screen = new Screen();
-    
-	var players = [ (new Player()) ];
-	screen.drawPlayers( players );
+	var input = Input.getInstance();
+
+	var player = new Player();
 
     var world = new MapWorld( parseInt( util.getParam( 'seed' ) ) );
-	world.generateWorld();
-	screen.drawMap( world, players[0] );
+	
+    var screen = new Screen();
 
-	var input = new Input( players[0], world, screen );
+    screen.addMap( world );
+    screen.addPlayer( player );
+//    screen.addNPC( {} );
+
+    screen.drawMap();
+    screen.drawPlayers();
+
+
 
 	console.log( 'seed', world.seed );
 });

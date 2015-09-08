@@ -43,7 +43,7 @@ define([
 				this.map.generator.blob( this, genCoord.x, genCoord.y, blobSize, 1 ); // grass
 				this.map.generator.blob( this, genCoord.x, genCoord.y, blobSize/4, 2 ); // forest
 				this.map.generator.blob( this, genCoord.x, genCoord.y, blobSize/12, 3 ); // mountain
-				this.map.generator.blob( this, genCoord.x, genCoord.y, 1, 4 ); // cave
+				this.map.generator.blob( this, genCoord.x, genCoord.y, blobSize/20, 4 ); // cave
 			}
 
 			// add mountains
@@ -55,6 +55,7 @@ define([
 			// place castle and then wander and start mountain
 
 		};
+        this.generateWorld();
 
 	};
 	return MapWorld;

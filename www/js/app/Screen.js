@@ -5,6 +5,9 @@ define(["jquery"], function($) {
 			width: 21,
 			height: 21
 		};
+        
+        var objMap;
+        var arrPlayers = [];
 
 		var getFullScreen = function() {
 			var screenBlocks = [];
@@ -30,7 +33,17 @@ define(["jquery"], function($) {
 			return ( attClass.match(/\bshore-\S+/g) || [] ).join(' ');
 		};
 
-		this.drawPlayer = function( objMap, objPlayer )
+        this.addMap = function( objAMap )
+        {
+            objMap = objAMap;
+        }
+
+        this.addPlayer = function( objPlayer )
+        {
+            arrPlayers.push( objPlayer );
+        }
+
+		var drawPlayerOnMap = function()
 		{
 			// draw player
 			var playerScreenPos = {
@@ -38,17 +51,17 @@ define(["jquery"], function($) {
 				y: Math.floor( size.height / 2 )
 			};
 			if ( objMap.max.x <= size.width ) {
-				playerScreenPos.x = objPlayer.pos.x;
+				playerScreenPos.x = arrPlayers[0].pos.x;
 			}
 			if ( objMap.max.y <= size.height ) {
-				playerScreenPos.y = objPlayer.pos.y;
+				playerScreenPos.y = arrPlayers[0].pos.y;
 			}
 			$('#mapGrid .cell .player').remove();
 			$( '#mapGrid .block_' + playerScreenPos.x + 'x' + playerScreenPos.y )
 				.append('<div class="player"></div>');
 		};
 
-		this.screenCoordToMapCoord = function( objCoord, objMap, objPlayer )
+		var screenCoordToMapCoord = function( objCoord, objMap, objPlayer )
 		{
 			var mapOffset = {
 				x: objPlayer.pos.x - Math.floor( size.width / 2 ),
@@ -72,33 +85,37 @@ define(["jquery"], function($) {
 			return mapCoord;
 		};
 
-		this.drawPlayers = function( arrPlayers )
+		this.drawPlayers = function()
 		{
+           
             
             for ( playerIdx in arrPlayers )
             {
+               
                 var player = arrPlayers[ playerIdx ];
                 var playerDiv = $( '<div id="player' + playerIdx + '"></div>' );
                 $( playerDiv ).append( '<div class="player-name">' + player.stat.name + '</div>' );
-                $( playerDiv ).append( '<div class="max-hp"><div class="current-hp" style="width:' + 100 * (player.condition.health / player.attribute.vitality) + '%;"></div><div class="current-mp-text">'+player.condition.health+'/'+ player.attribute.vitality+'</div></div>' );
+                $( playerDiv ).append( '<div class="max-hp"><div class="current-hp" style="width:' + 100 *(player.condition.health / player.attribute.vitality) + '%;"></div><div class="current-hp-text">'+player.condition.health+'/'+ player.attribute.vitality+'</div></div>' );
                 $( playerDiv ).append( '<div class="max-mp"><div class="current-mp" style="width:' + 100 * (player.condition.mana / player.attribute.wisdom) + '%;"></div><div class="current-mp-text">'+player.condition.mana+'/'+ player.attribute.wisdom+'</div></div>' );
                 $( '#playerBar' ).append( playerDiv )
 ;
             }
         };
 
-		this.drawMap = function( objMap, objPlayer, arrObjCoord_screen )
+		var drawMap = function( arrObjCoord_screen )
 		{
 			if ( typeof( arrObjCoord_screen) === "undefined" )
 			{
-				arrObjCoord_screen = this.full;
+				arrObjCoord_screen = getFullScreen();
 			}
 			else if ( !Array.isArray( arrObjCoord_screen ) )
 			{
 				return;
 			}
 
-			this.drawPlayer( objMap, objPlayer );
+            var objPlayer = arrPlayers[0];
+
+			drawPlayerOnMap( objMap, objPlayer );
 
 			// update map tiles  // for all items in the array of screen coordinates
 			for (var i=0; i<arrObjCoord_screen.length; i+=1)
@@ -106,7 +123,7 @@ define(["jquery"], function($) {
 				var objScreenCoord = arrObjCoord_screen[i];
 
 				var mapCoord =
-					this.screenCoordToMapCoord( objScreenCoord, objMap, objPlayer );
+					screenCoordToMapCoord( objScreenCoord, objMap, objPlayer );
 
 				var tileId = objMap.blocks[ mapCoord.x ][ mapCoord.y ];
 				var $block =
@@ -139,6 +156,9 @@ define(["jquery"], function($) {
 			}
 
 		};
+        this.drawMap = function() {
+            drawMap();
+        }
 
 		var getPlayerBar = function( )
 		{
@@ -184,6 +204,21 @@ define(["jquery"], function($) {
 			return gameConsole;
 		};
 
+        var watch = function() {
+            var objPlayer = arrPlayers[0];
+			if ( objPlayer.pos.move )
+			{
+                objPlayer.pos.move = false;
+				if ( objPlayer.pos.x < 0 ) { objPlayer.pos.x = objMap.max.x-1; }
+				if ( objPlayer.pos.x > objMap.max.x-1 ) { objPlayer.pos.x = 0; }
+				if ( objPlayer.pos.y < 0 ) { objPlayer.pos.y = objMap.max.y-1; }
+				if ( objPlayer.pos.y > objMap.max.y-1 ) { objPlayer.pos.y = 0; }
+				drawMap();
+				move = false;
+			}
+        }
+        var watchInt = setInterval( watch, 10 );
+
 		this.init = function( )
 		{
 			// prepare screen
@@ -199,7 +234,6 @@ define(["jquery"], function($) {
 
 		};
 
-		console.log( 'init' );
 		this.init();
 
 	};
