@@ -86,9 +86,7 @@ define(["jquery"], function($) {
 		};
 
 		this.drawPlayers = function()
-		{
-           
-            
+        {
             for ( playerIdx in arrPlayers )
             {
                
