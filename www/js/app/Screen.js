@@ -212,7 +212,6 @@ define(["jquery"], function($) {
 				if ( objPlayer.pos.y < 0 ) { objPlayer.pos.y = objMap.max.y-1; }
 				if ( objPlayer.pos.y > objMap.max.y-1 ) { objPlayer.pos.y = 0; }
 				drawMap();
-				move = false;
 			}
         }
         var watchInt = setInterval( watch, 10 );

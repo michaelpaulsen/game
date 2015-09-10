@@ -92,10 +92,12 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 			}
             input.objKeys.last = 0;
         };
-        var inputInt = setInterval( checkInput, 300/(this.attribute.speed
-        /*the ()'s are if you want to add an equaion here so that it dose it frist */
-                                                  )
-                                  );
+        var inputInt =
+            setInterval(
+                checkInput,
+                300/(this.attribute.speed)
+                /*the ()'s are if you want to add an equaion here so that it dose it frist */
+            );
 
     };
 	return Player;
