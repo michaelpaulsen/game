@@ -55,6 +55,7 @@ define([
 			// place castle and then wander and start mountain
 
 		};
+        this.generateWorld();
 
 	};
 	return MapWorld;
