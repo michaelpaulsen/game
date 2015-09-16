@@ -91,10 +91,12 @@ define(["jquery"], function($) {
             {
                
                 var player = arrPlayers[ playerIdx ];
+                var hp = 100 *(player.condition.health / player.attribute.vitality);
+                var mp =  100 * (player.condition.mana / player.attribute.wisdom);
                 var playerDiv = $( '<div id="player' + playerIdx + '"></div>' );
                 $( playerDiv ).append( '<div class="player-name">' + player.stat.name + '</div>' );
-                $( playerDiv ).append( '<div class="max-hp"><div class="current-hp" style="width:' + 100 *(player.condition.health / player.attribute.vitality) + '%;"></div><div class="current-hp-text">'+player.condition.health+'/'+ player.attribute.vitality+'</div></div>' );
-                $( playerDiv ).append( '<div class="max-mp"><div class="current-mp" style="width:' + 100 * (player.condition.mana / player.attribute.wisdom) + '%;"></div><div class="current-mp-text">'+player.condition.mana+'/'+ player.attribute.wisdom+'</div></div>' );
+                $( playerDiv ).append( '<div class="max-hp"><div class="current-hp" style="width:' + hp + '%;"></div><div class="current-hp-text">'+hp+'%</div></div>' );
+                $( playerDiv ).append( '<div class="max-mp"><div class="current-mp" style="width:' +mp+ '%;"></div><div class="current-mp-text">'+mp+'%</div></div>' );
                 $( '#playerBar' ).append( playerDiv )
 ;
             }

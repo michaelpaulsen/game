@@ -11,7 +11,7 @@ define([
 		this.max = { x: 100, y: 100 };
 
 		this.tiles = this.map.tiles.concat(
-			[ "water", "grass", "forest", "mountain", "cave" ]
+			[ "water", "grass", "forest", "mountain", "cave", "lighthouse" ]
 		);
 		this.blocks = this.map.blocks;
 
@@ -44,7 +44,9 @@ define([
 				this.map.generator.blob( this, genCoord.x, genCoord.y, blobSize/4, 2 ); // forest
 				this.map.generator.blob( this, genCoord.x, genCoord.y, blobSize/12, 3 ); // mountain
 				this.map.generator.blob( this, genCoord.x, genCoord.y, 1, 4 ); // cave
-			}
+                this.map.generator.blob( this, genCoord.x+5, genCoord.y+5, 8, 5 ); // light houses?
+			
+            }
 
 			// add mountains
 			genCoord = {
