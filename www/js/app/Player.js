@@ -29,7 +29,7 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
             agility: 1,
             speed: 1,
             charisma: 1,
-            vitality: 10 ,/*when desisding how often to heal /10 */
+            vitality: 10 ,/*when desisding how often to heal -9 */
             wisdom: 10
         };
 
@@ -62,8 +62,8 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 			y: 0,
             move: false
 		};
+        
         this.pos = pos;
-
         var input = Input.getInstance();
         var checkInput = function() {
             if ( input.objKeys.last == 38 || input.objKeys.last == 87 || input.objKeys.last == 119 )

@@ -39,6 +39,7 @@ body {
     height: 2vmin;
     width: 90%;
     margin: 1px auto;
+    margin-bottom: 5px;
 }
 #playerBar .current-hp,
 #playerBar .current-mp {
@@ -98,10 +99,10 @@ body {
 
 
 .tile-water {
-	background-color: rgba(78, 78, 255, 1.0);
+	background-color: rgba(0, 255, 255, 1.0);
 }
 .tile-grass {
-	background-color: rgba(0, 255, 0, 1);
+	background-color: rgba(0, 117, 30, 1);
 }
 
 .tile-water.shore-n {
@@ -132,6 +133,7 @@ body {
 	background-image: url('../img/shore-s.gif'), url('../img/shore-w.gif');
 	background-position: center bottom, left center;
 }
+
 .tile-water.shore-n.shore-s {
 	background-image: url('../img/shore-n.gif'), url('../img/shore-s.gif');
 	background-position: center top, center bottom;
@@ -162,15 +164,25 @@ body {
 }
 
 .tile-forest {
-	background: url('../img/tree.png') no-repeat center center rgba(0, 255, 0, 1);
+	background: url('../img/tree.png') no-repeat center center rgba(0, 117, 30, 1);
 }
 
 .tile-mountain {
-	background: url('../img/mountain.png') no-repeat center center rgba(0, 255, 0, 1);
+	background: url('../img/mountain.png') no-repeat center center rgba(0, 117, 30, 1);
 }
 
 .tile-cave {
-	background: url('../img/cave.png') no-repeat center center rgba(0, 255, 0, 1);
+	background: url('../img/cave.png') no-repeat center center rgba(0, 117, 30, 1);
+}
+    
+.tile-lighthouse{
+    background: url('../img/lighthouse.png') no-repeat center center rgba(0, 117, 30, 1);
+    
+}
+    
+.tile-town{
+    background: url('../img/town.png') no-repeat center center rgba(0, 117, 30, 1);
+    
 }
 
 .player {
