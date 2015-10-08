@@ -39,6 +39,7 @@ body {
     height: 2vmin;
     width: 90%;
     margin: 1px auto;
+    margin-bottom: 5px;
 }
 #playerBar .current-hp,
 #playerBar .current-mp {
@@ -173,9 +174,14 @@ body {
 .tile-cave {
 	background: url('../img/cave.png') no-repeat center center rgba(0, 117, 30, 1);
 }
-.tile-lighthouse{
     
+.tile-lighthouse{
     background: url('../img/lighthouse.png') no-repeat center center rgba(0, 117, 30, 1);
+    
+}
+    
+.tile-town{
+    background: url('../img/town.png') no-repeat center center rgba(0, 117, 30, 1);
     
 }
 
