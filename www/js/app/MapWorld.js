@@ -11,7 +11,7 @@ define([
 		this.max = { x: 100, y: 100 };
 
 		this.tiles = this.map.tiles.concat(
-			[ "water", "grass", "forest", "mountain", "cave", "lighthouse","town" ]
+			[ "water", "grass", "forest", "mountain", "cave", "lighthouse","town","temple" ]
 		);
 		this.blocks = this.map.blocks;
 
@@ -44,14 +44,11 @@ define([
 				this.map.generator.blob( this, genCoord.x, genCoord.y, blobSize, 1 ); // grass
 				this.map.generator.blob( this, genCoord.x, genCoord.y, blobSize/4, 2 ); // forest
 				this.map.generator.blob( this, genCoord.x, genCoord.y, blobSize/12, 3 ); // mountain
-				this.map.generator.blob( this, genCoord.x, genCoord.y, 1, 4 );// cave
-                /*for (i = 5; i < amuont+5; i++) { 
-                    */this.map.generator.blob( this, genCoord.x+i, genCoord.y+i, 1, 5 ); // light houses?
-                    /*
-                }*/
-                this.map.generator.blob( this, genCoord.x+10, genCoord.y+5, 1, 6 );// towns
-			
-            }
+				this.map.generator.blob( this, genCoord.x, genCoord.y, 1, 4 ); // cave
+				this.map.generator.blob( this, genCoord.x+i, genCoord.y+i, 1, 5 ); // light houses?
+				this.map.generator.blob( this, genCoord.x+10, genCoord.y+5, 1, 6 ); // towns
+				this.map.generator.blob( this, genCoord.x+7, genCoord.y+2, 2, 7 ); // temple
+			}
 
 			// add mountains
 			genCoord = {
