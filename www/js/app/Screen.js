@@ -1,13 +1,15 @@
 define(["jquery"], function($) {
 
+	var screen = null;
+
 	var Screen = function() {
 		var size = {
 			width: 21,
 			height: 21
 		};
         
-        var objMap;
-        var arrPlayers = [];
+		var objMap;
+		var arrPlayers = [];
 
 		var getFullScreen = function() {
 			var screenBlocks = [];
@@ -23,7 +25,6 @@ define(["jquery"], function($) {
 			}
 			return screenBlocks;
 		};
-
 		this.full = getFullScreen();
 
 		var removeTile = function (index, attClass) {
@@ -33,15 +34,15 @@ define(["jquery"], function($) {
 			return ( attClass.match(/\bshore-\S+/g) || [] ).join(' ');
 		};
 
-        this.addMap = function( objAMap )
-        {
-            objMap = objAMap;
-        }
+		this.addMap = function( objAMap )
+		{
+			objMap = objAMap;
+		}
 
-        this.addPlayer = function( objPlayer )
-        {
-            arrPlayers.push( objPlayer );
-        }
+		this.addPlayer = function( objPlayer )
+		{
+			arrPlayers.push( objPlayer );
+		}
 
 		var drawPlayerOnMap = function()
 		{
@@ -86,21 +87,19 @@ define(["jquery"], function($) {
 		};
 
 		this.drawPlayers = function()
-        {
-            for ( playerIdx in arrPlayers )
-            {
-               
-                var player = arrPlayers[ playerIdx ];
-                var hp = 100 *(player.condition.health / player.attribute.vitality);
-                var mp =  100 * (player.condition.mana / player.attribute.wisdom);
-                var playerDiv = $( '<div id="player' + playerIdx + '"></div>' );
-                $( playerDiv ).append( '<div class="player-name">' + player.stat.name + '</div>' );
-                $( playerDiv ).append( '<div class="max-hp"><div class="current-hp" style="width:' + hp + '%;"></div><div class="current-hp-text">'+hp+'%</div></div>' );
-                $( playerDiv ).append( '<div class="max-mp"><div class="current-mp" style="width:' +mp+ '%;"></div><div class="current-mp-text">'+mp+'%</div></div>' );
-                $( '#playerBar' ).append( playerDiv )
-;
-            }
-        };
+		{
+			for ( playerIdx in arrPlayers )
+			{
+				var player = arrPlayers[ playerIdx ];
+				var hp = 100 *(player.condition.health / player.attribute.vitality);
+				var mp =  100 * (player.condition.mana / player.attribute.wisdom);
+				var playerDiv = $( '<div id="player' + playerIdx + '"></div>' );
+				$( playerDiv ).append( '<div class="player-name">' + player.stat.name + '</div>' );
+				$( playerDiv ).append( '<div class="max-hp"><div class="current-hp" style="width:' + hp + '%;"></div><div class="current-hp-text">'+hp+'%</div></div>' );
+				$( playerDiv ).append( '<div class="max-mp"><div class="current-mp" style="width:' +mp+ '%;"></div><div class="current-mp-text">'+mp+'%</div></div>' );
+				$( '#playerBar' ).append( playerDiv );
+			}
+		};
 
 		var drawMap = function( arrObjCoord_screen )
 		{
@@ -112,8 +111,7 @@ define(["jquery"], function($) {
 			{
 				return;
 			}
-
-            var objPlayer = arrPlayers[0];
+			var objPlayer = arrPlayers[0];
 
 			drawPlayerOnMap( objMap, objPlayer );
 
@@ -156,11 +154,11 @@ define(["jquery"], function($) {
 			}
 
 		};
-        this.drawMap = function() {
-            drawMap();
-        }
+		this.drawMap = function() {
+			drawMap();
+		}
 
-		var getPlayerBar = function( )
+		var createPlayerBar = function( )
 		{
 			var playerBar = document.createElement('div');
 			$( playerBar ).attr('id', 'playerBar');
@@ -168,7 +166,7 @@ define(["jquery"], function($) {
 			return playerBar;
 		};
 
-		var getMapGrid = function( )
+		var createMapGrid = function( )
 		{
 			var map = document.createElement('div');
 			$( map ).attr('id', 'mapGrid');
@@ -188,7 +186,7 @@ define(["jquery"], function($) {
 			return map;
 		};
 
-		var getInfoBar = function( )
+		var createInfoBar = function( )
 		{
 			var infoBar = document.createElement('div');
 			$( infoBar ).attr('id', 'infoBar');
@@ -196,7 +194,7 @@ define(["jquery"], function($) {
 			return infoBar;
 		};
 
-		var getConsole = function( )
+		var createConsole = function( )
 		{
 			var gameConsole = document.createElement('div');
 			$( gameConsole ).attr('id', 'gameConsole');
@@ -204,19 +202,23 @@ define(["jquery"], function($) {
 			return gameConsole;
 		};
 
-        var watch = function() {
-            var objPlayer = arrPlayers[0];
-			if ( objPlayer.pos.move )
-			{
-                objPlayer.pos.move = false;
-				if ( objPlayer.pos.x < 0 ) { objPlayer.pos.x = objMap.max.x-1; }
-				if ( objPlayer.pos.x > objMap.max.x-1 ) { objPlayer.pos.x = 0; }
-				if ( objPlayer.pos.y < 0 ) { objPlayer.pos.y = objMap.max.y-1; }
-				if ( objPlayer.pos.y > objMap.max.y-1 ) { objPlayer.pos.y = 0; }
-				drawMap();
-			}
-        }
-        var watchInt = setInterval( watch, 10 );
+		this.console = function( type, msg )
+		{
+			var msgDiv = document.createElement('div');
+			$( msgDiv ).addClass( type ).html( msg );
+			$('#gameConsole').append( msgDiv ).scrollTop( $('#gameConsole')[0].scrollHeight );
+
+		}
+		this.debug = function()
+		{
+			var args = Array.prototype.slice.call(arguments);
+			this.console( 'debug', args.join(' ') );
+		}
+		this.info = function()
+		{
+			var args = Array.prototype.slice.call(arguments);
+			this.console( 'info', args.join(' ') );
+		}
 
 		this.init = function( )
 		{
@@ -224,19 +226,25 @@ define(["jquery"], function($) {
 			var screen = document.createElement('div');
 			$( screen ).attr('id', 'screen');
 
-			$( screen ).append( getPlayerBar() );
-			$( screen ).append( getMapGrid() );
-			$( screen ).append( getInfoBar() );
-			$( screen ).append( getConsole() );
+			$( screen ).append( createPlayerBar() );
+			$( screen ).append( createMapGrid() );
+			$( screen ).append( createInfoBar() );
+			$( screen ).append( createConsole() );
 
 			$( 'body' ).append( screen );
 
 		};
-
 		this.init();
 
 	};
 
+	return {
+		getInstance: function() {
+			if (screen === null) {
+				screen = new Screen();
+			}
+			return screen;
+		}
+	};
 
-	return Screen;
 });
