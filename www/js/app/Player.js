@@ -1,6 +1,8 @@
 define([
-    'app/Input'
-], function (Input) {
+    'app/Input',
+    'app/Screen',
+    'app/Map'
+], function (Input, Screen, Map) {
 
 	var Player = function () {
 
@@ -27,7 +29,7 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 			endurance: 1,
 			dexterity: 1,
 			agility: 1,
-			speed: 1,
+			speed: 20,
 			charisma: 1,
 			vitality: 10, /* when desisding how often to heal -9 */
 			wisdom: 10
@@ -64,37 +66,61 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 			y: 0,
 			move: false
 		};
-        
+
 		this.pos = pos;
 		var input = Input.getInstance();
+		var screen = Screen.getInstance();
+		var map = Map.getInstance();
+
 		var checkInput = function () {
-			if ( input.objKeys.last === 38 || input.objKeys.last === 87 || input.objKeys.last === 119 ) {
+			//console.log( input.keys.down );
+			//console.log( input.keys.last );
+			//console.log( input.keys.down[ 65 ] && input.keys.last === 65 );
+			if ( ( input.keys.down[ 38 ] && input.keys.last === 38 ) ||
+			     ( input.keys.down[ 87 ] && input.keys.last === 87 ) ) {
 				// UP
 				pos.y -=  1;
+				if ( pos.y < 0 ) { pos.y = map.max.y-1; }
 				pos.move = true;
 			}
-			if ( input.objKeys.last === 37 || input.objKeys.last === 65 || input.objKeys.last === 97 ) {
+			if ( ( input.keys.down[ 37 ] && input.keys.last === 37 ) ||
+			     ( input.keys.down[ 65 ] && input.keys.last === 65 ) ) {
 				// LEFT
 				pos.x -= 1;
+				if ( pos.x < 0 ) { pos.x = map.max.x-1; }
 				pos.move = true;
 			}
-			if ( input.objKeys.last === 40 || input.objKeys.last === 83 || input.objKeys.last === 115 ) {
+			if ( ( input.keys.down[ 40 ] && input.keys.last === 40 ) ||
+			     ( input.keys.down[ 83 ] && input.keys.last === 83 ) ) {
 				// DOWN
 				pos.y += 1;
+				if ( pos.y > map.max.y-1 ) { pos.y = 0; }
 				pos.move = true;
 			}
-			if ( input.objKeys.last === 39 || input.objKeys.last === 68 || input.objKeys.last === 100 ) {
+			if ( ( input.keys.down[ 39 ] && input.keys.last === 39 ) ||
+			     ( input.keys.down[ 68 ] && input.keys.last === 68 ) ) {
 				// RIGHT (d|D)
 				pos.x += 1;
+				if ( pos.x > map.max.x-1 ) { pos.x = 0; }
 				pos.move = true;
 			}
-			input.objKeys.last = 0;
+			if ( pos.move )
+			{
+				pos.move = false;
+				//map.setPlayerPosition( pos.x, pos.y );
+				screen.drawMap();
+				screen.debug( pos.x, pos.y );
+			}
 		};
+
+		console.log(
+				'player speed delay',
+				300 * ( Math.pow( .95, this.attribute.speed ) + .2 )
+		);
 		var inputInt =
 			setInterval(
 				checkInput,
-				300 / (this.attribute.speed)
-				/*the ()'s are if you want to add an equaion here so that it dose it frist */
+				300 * ( Math.pow( .95, this.attribute.speed ) + .2 )
 			);
 
 	};
