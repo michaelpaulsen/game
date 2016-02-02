@@ -2,8 +2,6 @@ define([
 	'app/Generator'
 ], function(Generator) {
 
-	var map = null;
-
 	var Map = function( seed )
 	{
 		this.generator = new Generator( seed );
@@ -12,11 +10,10 @@ define([
 
 		this.tiles = [];
 		this.blocks = [];
-		this.max = {};
 
-		this.findLand = function( x, y )
+		this.findLand = function( objMap, x, y )
 		{
-			while ( this.blocks[y][x] === 0 )
+			while ( objMap.blocks[y][x] === 0 )
 			{
 				var direction = Math.floor( this.generator.random() * 4 );
 				switch (direction) {
@@ -25,15 +22,12 @@ define([
 					case 2: x-=1; break;
 					case 3: x+=1; break;
 				}
-				if (x<0) { x=this.max.x-1; }
-				if (x>this.max.x-1) { x=0; }
-				if (y<0) { y=this.max.y-1; }
-				if (y>this.max.y-1) { y=0; }
+				if (x<0) { x=objMap.max.x-1; }
+				if (x>objMap.max.x-1) { x=0; }
+				if (y<0) { y=objMap.max.y-1; }
+				if (y>objMap.max.y-1) { y=0; }
 			}
 		};
-
-		this.setPlayerPosition = function( x, y ) {
-		}
 
 		/*
 		this.getNearbyTileId = function( objCoord, objDirection ) {
@@ -49,14 +43,6 @@ define([
 		};
 		*/
 	};
-
-	return {
-		getInstance: function( seed ) {
-			if (map === null) {
-				map = new Map( seed );
-			}
-			return map;
-		}
-	};
+	return Map;
 
 });

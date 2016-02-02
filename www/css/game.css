@@ -18,16 +18,16 @@ body {
 
 #playerBar,
 #infoBar {
-	color: aqua;
-	font-size: 2vw;
-	font-size: 2vmin;
+    color: aqua;
+    font-size: 2vw;
+    font-size: 2vmin;
 	border: 1px solid blue;
 	display: inline-block;
 	height: 60vw;
 	height: 60vmin;
 	margin: 0 1vw;
 	margin: 0 1vmin;
-	vertical-align: top;
+    vertical-align: top;
 	width: 17vw;
 	width: 17vmin;
 }
@@ -65,7 +65,7 @@ body {
 	display: inline-block;
 	height: 60vw;
 	height: 60vmin;
-	vertical-align: top;
+    vertical-align: top;
 	width: 60vw;
 	width: 60vmin;
 }
@@ -89,21 +89,12 @@ body {
 
 #gameConsole {
 	border: 1px solid blue;
-	color: #fff;
 	height: 17vw;
 	height: 17vmin;
 	margin: 1vh auto;
-	overflow: hidden;
 	padding: 0.5em;
-	text-align: left;
 	width: 98vw;
 	width: 98vmin;
-}
-#gameConsole .debug {
-	color: #666;
-}
-#gameConsole .info {
-	color: #996;
 }
 
 
@@ -194,13 +185,7 @@ body {
     
 }
 
-.tile-temple{
-    background: url('../img/temple.png') no-repeat center center rgba(0, 117, 30, 1);
-    
-}
-
 .player {
-	/*background-color: rgba( 255, 0, 0, 0.5 );*/
-    background: url('../img/player.png') no-repeat center center rgba(0, 117, 30, 0);
+	background-color: rgba( 255, 0, 0, 0.5 );
 }
 
