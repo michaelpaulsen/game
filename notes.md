@@ -45,7 +45,7 @@ than set the blocks to blue
 
 }
 
-### qests 
+### qests.
 have a monster that has no Ap for villigers 
 have it so that there needs to be a villige in 10m (1 "block" = 1 m) from where the villiger spawns
 have it so you could talk to these villigers and get quests from them 
@@ -62,5 +62,12 @@ add new obgectives as you go along in a quest
 
 this would be in a while(playing)
 if(villiger1.talkedTo && hasQuest){
+
 addQuest()
+
 }
+
+
+### items
+make Items that you could pick up. 
+have some things that have spechal powers 
