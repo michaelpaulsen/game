@@ -113,6 +113,9 @@ body {
 .tile-grass {
 	background-color: rgba(0, 117, 30, 1);
 }
+.tile-moster {
+	background-color: rgba(20, 117, 30, 1);
+}
 
 .tile-water.shore-n {
 	background: url('../img/shore-n.gif') no-repeat center top rgba(78, 78, 255, 1);

@@ -5,7 +5,7 @@ var World = function(seed)
 
 	this.max = new Coord(100, 100);
 
-	this.tiles = [ "water", "grass", "forest", "mountain", "cave" ];
+	this.tiles = [ "water", "grass", "forest", "mountain", "cave"];
 	this.blocks = new Array();
 
 	var random = function()
