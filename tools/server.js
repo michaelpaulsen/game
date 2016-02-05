@@ -11,8 +11,9 @@ var http = require('http'),
     port = process.argv[2] || 8888,
     types = {
         'html': 'text/html',
-        'js': 'application/javascript'
-     'css': 'text/css'},
+        'js': 'application/javascript',
+        'css': 'text/css'
+    },
     site = 'http://localhost:' + port;
 
 http.createServer(function (request, response) {

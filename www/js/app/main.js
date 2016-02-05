@@ -8,21 +8,20 @@ define([
 ], function($, util, Screen, MapWorld, Player, Input) {
 
 	var input = Input.getInstance();
+	var screen = Screen.getInstance();
+
+
+	var world = new MapWorld( parseInt( util.getParam( 'seed' ) ) );
+	screen.addMap( world.map );
 
 	var player = new Player();
-
-    var world = new MapWorld( parseInt( util.getParam( 'seed' ) ) );
-	
-    var screen = new Screen();
-
-    screen.addMap( world );
-    screen.addPlayer( player );
+	screen.addPlayer( player );
 //    screen.addNPC( {} );
 
-    screen.drawMap();
-    screen.drawPlayers();
+	screen.drawMap();
+	screen.drawPlayers();
 
 
+	screen.info( 'seed', world.seed );
 
-	console.log( 'seed', world.seed );
 });
