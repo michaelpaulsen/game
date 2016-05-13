@@ -12,7 +12,6 @@ define([
 			type: "knight",
 			gender: "male"
 		};
-
 /*
 strength - hit power, weight carrying ability
 endurance - exersion over time - (maybe options to enable power attacks/spells (wears off slower for high endurance)
@@ -29,7 +28,7 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 			endurance: 1,
 			dexterity: 1,
 			agility: 1,
-			speed: 20,
+			speed: 0.5,
 			charisma: 1,
 			vitality: 10, /* when desisding how often to heal -9 */
 			wisdom: 10
@@ -112,16 +111,25 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 				screen.debug( pos.x, pos.y );
 			}
 		};
-
-		console.log(
-				'player speed delay',
-				300 * ( Math.pow( .95, this.attribute.speed ) + .2 )
-		);
 		var inputInt =
+
 			setInterval(
 				checkInput,
 				300 * ( Math.pow( .95, this.attribute.speed ) + .2 )
 			);
+		var addfuncoin = function(type){
+			if(type == "health"){
+			player.stat.health += player.attribute.vitality-9	
+			}else if (type == "magic"){
+				player.stat.magic += player.attribute.wisdom
+			}else {
+				console.log(type,"is undifind \n did you mean health or magic ")
+			}
+		}
+		setInterval(
+				addfuncoin(health),
+				1000
+			)
 
 	};
 	return Player;

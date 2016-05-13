@@ -94,9 +94,9 @@ define(["jquery"], function($) {
 				var hp = 100 *(player.condition.health / player.attribute.vitality);
 				var mp =  100 * (player.condition.mana / player.attribute.wisdom);
 				var playerDiv = $( '<div id="player' + playerIdx + '"></div>' );
-				$( playerDiv ).append( '<div class="player-name">' + player.stat.name + '</div>' );
-				$( playerDiv ).append( '<div class="max-hp"><div class="current-hp" style="width:' + hp + '%;"></div><div class="current-hp-text">'+hp+'%</div></div>' );
-				$( playerDiv ).append( '<div class="max-mp"><div class="current-mp" style="width:' +mp+ '%;"></div><div class="current-mp-text">'+mp+'%</div></div>' );
+				$( playerDiv ).append( '<div class="player-name">' + player.stat.name + '</div>' );/* displays the name of the player*/
+				$( playerDiv ).append( '<div class="max-hp">'+/*health bar out line*/'<div class="current-hp" style="width:'/*health bar */ + hp + '%;"></div><div class="current-hp-text">'+hp+'%</div></div>' );
+				$( playerDiv ).append( '<div class="max-mp">'/*magic bar out line*/+'<div class="current-mp" style="width:'/*magic bar*/ +mp+ '%;"></div><div class="current-mp-text">'+mp+'%</div></div>' );
 				$( '#playerBar' ).append( playerDiv );
 			}
 		};
