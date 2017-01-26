@@ -7,7 +7,7 @@ define([
 	var Player = function () {
 
 		this.stat = {
-			name: 'Simon',
+			name: 'Michael',
 			race: "Human",
 			type: "knight",
 			gender: "male"
@@ -28,7 +28,7 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 			endurance: 1,
 			dexterity: 1,
 			agility: 1,
-			speed: 0.5,
+			speed: 100,
 			charisma: 1,
 			vitality: 10, /* when desisding how often to heal -9 */
 			wisdom: 10
