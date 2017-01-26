@@ -117,19 +117,7 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 				checkInput,
 				300 * ( Math.pow( .95, this.attribute.speed ) + .2 )
 			);
-		/*var addfuncoin = function(type){
-			if(type == "health"){
-			this.stat.health += this.attribute.vitality-9;	
-			}else if (type == "magic"){
-				this.stat.magic += this.attribute.wisdom;
-			}else {
-				console.log(type,"is undifind \n did you mean health or magic ")
-			}
-		}
-		setInterval(
-				addfuncoin("health"),
-				1000
-			);*/
+		
 
 	};
 	return Player;
