@@ -12,6 +12,7 @@ define([
 			type: "knight",
 			gender: "male"
 		};
+
 /*
 strength - hit power, weight carrying ability
 endurance - exersion over time - (maybe options to enable power attacks/spells (wears off slower for high endurance)
@@ -28,7 +29,7 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 			endurance: 1,
 			dexterity: 1,
 			agility: 1,
-			speed: 0.5,
+			speed: 20,
 			charisma: 1,
 			vitality: 10, /* when desisding how often to heal -9 */
 			wisdom: 10
@@ -70,7 +71,9 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 		var input = Input.getInstance();
 		var screen = Screen.getInstance();
 		var map = Map.getInstance();
-
+				}
+		
+		var debug = false;
 		var checkInput = function () {
 			//console.log( input.keys.down );
 			//console.log( input.keys.last );
@@ -98,6 +101,7 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 			}
 			if ( ( input.keys.down[ 39 ] && input.keys.last === 39 ) ||
 			     ( input.keys.down[ 68 ] && input.keys.last === 68 ) ) {
+				
 				// RIGHT (d|D)
 				pos.x += 1;
 				if ( pos.x > map.max.x-1 ) { pos.x = 0; }
@@ -108,33 +112,20 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 				pos.move = false;
 				//map.setPlayerPosition( pos.x, pos.y );
 				screen.drawMap();
-				screen.debug( pos.x, pos.y );
-			}
+				if(debugg){screen.debug( pos.x, pos.y );}
+				this.a += 1;
+		}
 		};
 
 		console.log(
 				'player speed delay',
 				300 * ( Math.pow( .95, this.attribute.speed ) + .2 )
-		);
+				);
 		var inputInt =
-
 			setInterval(
 				checkInput,
 				300 * ( Math.pow( .95, this.attribute.speed ) + .2 )
 			);
-		/*var addfuncoin = function(type){
-			if(type == "health"){
-			this.stat.health += this.attribute.vitality-9;	
-			}else if (type == "magic"){
-				this.stat.magic += this.attribute.wisdom;
-			}else {
-				console.log(type,"is undifind \n did you mean health or magic ")
-			}
-		}
-		setInterval(
-				addfuncoin("health"),
-				1000
-			);*/
 
 	};
 	return Player;
