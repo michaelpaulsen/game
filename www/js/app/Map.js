@@ -1,41 +1,59 @@
 define([
 	'app/Generator'
-], function(Generator) {
+], 
+	function(Generator) {
 
-	var map = null;
+	
+		var map = null;
 
-	var Map = function( seed )
-	{
-		this.generator = new Generator( seed );
+	var Map = function( seed ){
 
-		this.seed = this.generator.seed;
+			this.generator = new Generator( seed );
+		
+
+	this.seed = this.generator.seed;
+	
 
 		this.tiles = [];
+	
 		this.blocks = [];
-		this.max = {};
+		
+			this.max = {};
 
+	
 		this.findLand = function( x, y )
-		{
-			while ( this.blocks[y][x] === 0 )
-			{
-				var direction = Math.floor( this.generator.random() * 4 );
-				switch (direction) {
-					case 0: y-=1; break;
-					case 1: y+=1; break;
-					case 2: x-=1; break;
-					case 3: x+=1; break;
-				}
-				if (x<0) { x=this.max.x-1; }
-				if (x>this.max.x-1) { x=0; }
-				if (y<0) { y=this.max.y-1; }
-				if (y>this.max.y-1) { y=0; }
-			}
-		};
+{
 
-		this.setPlayerPosition = function( x, y ) {
+
+			while ( this.blocks[y][x] === 0 ){
+
+				var direction = Math.floor( this.generator.random() * 4 );
+
+				switch (direction) {
+				
+				case 0: y-=1; break;
+					
+				case 1: y+=1; break;
+
+				case 2: x-=1; break;
+				case 3: x+=1; break;
+
+			}
+
+			if (x<0) { x=this.max.x-1; }
+
+			if (x>this.max.x-1) { x=0; }
+			if (y<0) { y=this.max.y-1; }
+			if (y>this.max.y-1) { y=0; }
+
+		}
+	};
+
+	this.setPlayerPosition = function( x, y ) {
 		}
 
-		/*
+		
+												/*
 		this.getNearbyTileId = function( objCoord, objDirection ) {
 			var objDest = {
 				x: objCoord.x + objDirection.x,
@@ -48,15 +66,24 @@ define([
 			return this.blocks[ objDest.x ][ objDest.y ];
 		};
 		*/
+	
+};
+
+	
+return {
+
+		getInstance: function( seed ) {
+
+			if (map === null) {
+
+				map = new Map( seed );
+
+			}
+			
+	return map;
+		
+}
 	};
 
-	return {
-		getInstance: function( seed ) {
-			if (map === null) {
-				map = new Map( seed );
-			}
-			return map;
-		}
-	};
 
 });
