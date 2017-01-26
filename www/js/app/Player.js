@@ -111,6 +111,11 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 				screen.debug( pos.x, pos.y );
 			}
 		};
+
+		console.log(
+				'player speed delay',
+				300 * ( Math.pow( .95, this.attribute.speed ) + .2 )
+		);
 		var inputInt =
 
 			setInterval(

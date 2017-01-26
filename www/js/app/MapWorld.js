@@ -11,7 +11,7 @@ define([
 
 
 		this.map.tiles = this.map.tiles.concat(
-			[ "water", "grass", "forest", "mountain", "cave", "lighthouse","town","temple","monster" ]
+			[ "water", "grass", "forest", "mountain", "cave", "lighthouse","town","temple","monster" ];
 		);
 		this.blocks = this.map.blocks;
 
