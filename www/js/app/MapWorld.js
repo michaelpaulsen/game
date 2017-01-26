@@ -49,7 +49,7 @@ define([
 //				this.map.generator.blob( this.map, genCoord.x+i, genCoord.y+i, 1, 5 ); // light houses?
 //				this.map.generator.blob( this.map, genCoord.x+10, genCoord.y+5, 1, 6 ); // towns
 //				this.map.generator.blob( this.map, genCoord.x+7, genCoord.y+2, 2, 7 ); // temple
-			}
+	this.map.generator.blob( this.map, genCoord.x, genCoord.y, 15, 8 ); /*monsters*/		}
 
 			// add mountains
 			genCoord = {
