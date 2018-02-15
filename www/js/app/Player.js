@@ -1,17 +1,22 @@
 define([
-    'app/Input',
-    'app/Screen',
-    'app/Map'
-], function (Input, Screen, Map) {
-
+	'app/Input',
+	'app/Screen',
+	'app/Map',
+	'app/Item'
+	], function (Input, Screen, Map, Item) {
+	//console.log(item);
+	//var item = item;
 	var Player = function () {
-
+	
 		this.stat = {
 			name: 'Michael',
 			race: "Human",
 			type: "knight",
-			gender: "male"
+			gender: "male",
+			
 		};
+		this.backpack = [];
+
 /*
 strength - hit power, weight carrying ability
 endurance - exersion over time - (maybe options to enable power attacks/spells (wears off slower for high endurance)
@@ -30,7 +35,10 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 			agility: 1,
 			speed: 100,
 			charisma: 1,
-			vitality: 10, /* when desisding how often to heal -9 */
+			vitality: {
+				heal : 1,
+				maxHp: 10
+			},
 			wisdom: 10
 		};
 
@@ -70,34 +78,35 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 		var input = Input.getInstance();
 		var screen = Screen.getInstance();
 		var map = Map.getInstance();
-
+		var item = Item.getInstance();
 		var checkInput = function () {
 			//console.log( input.keys.down );
 			//console.log( input.keys.last );
 			//console.log( input.keys.down[ 65 ] && input.keys.last === 65 );
-			if ( ( input.keys.down[ 38 ] && input.keys.last === 38 ) ||
-			     ( input.keys.down[ 87 ] && input.keys.last === 87 ) ) {
+			if ( (( input.keys.down[ 38 ] && input.keys.last === 38 ) ||
+				( input.keys.down[ 87 ] && input.keys.last === 87 )) && !$(".block_10x9").hasClass("tile-water") ) {
 				// UP
 				pos.y -=  1;
+				
 				if ( pos.y < 0 ) { pos.y = map.max.y-1; }
 				pos.move = true;
 			}
-			if ( ( input.keys.down[ 37 ] && input.keys.last === 37 ) ||
-			     ( input.keys.down[ 65 ] && input.keys.last === 65 ) ) {
+			if ( (( input.keys.down[ 37 ] && input.keys.last === 37 ) ||
+				( input.keys.down[ 65 ] && input.keys.last === 65 )) && !$(".block_9x10").hasClass("tile-water") ) {
 				// LEFT
 				pos.x -= 1;
 				if ( pos.x < 0 ) { pos.x = map.max.x-1; }
 				pos.move = true;
 			}
-			if ( ( input.keys.down[ 40 ] && input.keys.last === 40 ) ||
-			     ( input.keys.down[ 83 ] && input.keys.last === 83 ) ) {
+			if ( (( input.keys.down[ 40 ] && input.keys.last === 40 ) ||
+				( input.keys.down[ 83 ] && input.keys.last === 83 )) && !$(".block_10x11").hasClass("tile-water") ) {
 				// DOWN
 				pos.y += 1;
 				if ( pos.y > map.max.y-1 ) { pos.y = 0; }
 				pos.move = true;
 			}
-			if ( ( input.keys.down[ 39 ] && input.keys.last === 39 ) ||
-			     ( input.keys.down[ 68 ] && input.keys.last === 68 ) ) {
+			if ( (( input.keys.down[ 39 ] && input.keys.last === 39 ) ||
+				( input.keys.down[ 68 ] && input.keys.last === 68 ))&& !$(".block_11x10").hasClass("tile-water") ) {
 				// RIGHT (d|D)
 				pos.x += 1;
 				if ( pos.x > map.max.x-1 ) { pos.x = 0; }
@@ -110,9 +119,11 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 				screen.drawMap();
 				screen.debug( pos.x, pos.y );
 			}
+			$(".player")
 		};
+	
 		var inputInt =
-
+		    
 			setInterval(
 				checkInput,
 				300 * ( Math.pow( .95, this.attribute.speed ) + .2 )
@@ -121,5 +132,4 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 
 	};
 	return Player;
-
 });

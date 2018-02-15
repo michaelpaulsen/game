@@ -7,17 +7,18 @@ requirejs.config({
 	"baseUrl": "js/lib",
 	"paths": {
 		"app": "../app",
-		"jquery": "//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min"
+		"jquery": "../lib/jquery"/**/
 	},
 	"map": {
 		// '*' means all modules will get 'jquery-private'
 		// for their 'jquery' dependency.
-		'*': { 'jquery': 'jquery-private' },
+		'*': { 'jquery': 'jquery' }//,
+	
 
 		// 'jquery-private' wants the real jQuery module
 		// though. If this line was not here, there would
 		// be an unresolvable cyclic dependency.
-		'jquery-private': { 'jquery': 'jquery' }
+		//'jquery-private': { 'jquery': 'jquery' }
 	}
 });
 

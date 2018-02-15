@@ -137,23 +137,32 @@ body {
 }
 
 
-.tile-water.shore-n {
+.shore-n {
 	background: url('../img/shore-n.gif') no-repeat center top rgba(78, 78, 255, 1);
+	height: 20px;
+	width: 100%;
 }
 
-.tile-water.shore-e {
+.shore-e {
 	background: url('../img/shore-e.gif') no-repeat right center rgba(78, 78, 255, 1);
+	width: 20px;
+	height: 100%;
 }
 
-.tile-water.shore-s {
+.shore-s {
 	background: url('../img/shore-s.gif') no-repeat center bottom rgba(78, 78, 255, 1);
+	height: 20px;
+	width: 100%;
 }
 
-.tile-water.shore-w {
+.shore-w {
 	background: url('../img/shore-w.gif') no-repeat left center rgba(78, 78, 255, 1);
-}
+	width: 20px;
+	height: 100%;
 
-.tile-water.shore-n.shore-w {
+	}
+
+shore-n.shore-w {
 	background-image: url('../img/shore-n.gif'), url('../img/shore-w.gif');
 	background-position: center top, left center;
 }
@@ -244,6 +253,7 @@ body {
 
 
 .player {
-	/*background-color: rgba( 255, 0, 0, 0.5 );*/
+	background-color: rgba( 255, 0, 0, 0.5 );/*
     background: url('../img/player.png') no-repeat center center rgba(0, 117, 30, 0);
+	*/
 }

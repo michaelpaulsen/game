@@ -91,12 +91,20 @@ define(["jquery"], function($) {
 			for ( playerIdx in arrPlayers )
 			{
 				var player = arrPlayers[ playerIdx ];
-				var hp = 100 *(player.condition.health / player.attribute.vitality);
+				var hp = 100 *(player.condition.health / player.attribute.vitality.maxHp);
 				var mp =  100 * (player.condition.mana / player.attribute.wisdom);
+				var h = 12.5;
 				var playerDiv = $( '<div id="player' + playerIdx + '"></div>' );
 				$( playerDiv ).append( '<div class="player-name">' + player.stat.name + '</div>' );/* displays the name of the player*/
 				$( playerDiv ).append( '<div class="max-hp">'+/*health bar out line*/'<div class="current-hp" style="width:'/*health bar */ + hp + '%;"></div><div class="current-hp-text">'+hp+'%</div></div>' );
 				$( playerDiv ).append( '<div class="max-mp">'/*magic bar out line*/+'<div class="current-mp" style="width:'/*magic bar*/ +mp+ '%;"></div><div class="current-mp-text">'+mp+'%</div></div>' );
+				for(var s = 0; s < player.backpack.length; s++){
+					if(player.backpack[s].amount>1){
+						$( playerDiv ).append( '<div class="item'+player.backpack[s].name+';  display:inline-block;">' + player.backpack[s].name + ' x:' + player.backpack[s].amount  + '<br> <div class = "'+ (s + 1) + ' " style="background-image:'+player.backpack[s].src + '; width:'+h+'px; height:'+h+'px; background-size:100%; background-repeat: no-repeat; display:inline-block;"></div></div>' );
+					}else{
+						$( playerDiv ).append( '<div class="item'+player.backpack[s].name+';  ">' + player.backpack[s].name + '<br> <div class = "'+ (s + 1) + ' " style="background-image:'+player.backpack[s].src + '; width:'+h+'px; height:'+h+'px; background-size:100%; background-repeat: no-repeat; display:inline-block;"></div></div>' );
+					}
+				}
 				$( '#playerBar' ).append( playerDiv );
 			}
 		};
@@ -148,9 +156,11 @@ define(["jquery"], function($) {
 						$block.addClass( 'shore-e' );
 					}
 				}
-				*/
 
-				//$block.html( mapCoord.x + ',' + mapCoord.y );
+				*/
+				/*
+				$block.html( mapCoord.x + ',' + mapCoord.y );
+				*/
 			}
 
 		};
@@ -206,7 +216,7 @@ define(["jquery"], function($) {
 		{
 			var msgDiv = document.createElement('div');
 			$( msgDiv ).addClass( type ).html( msg );
-			$('#gameConsole').append( msgDiv ).scrollTop( $('#gameConsole')[0].scrollHeight );
+			$('#gameConsole').empty().append( msgDiv );
 
 		}
 		this.debug = function()
