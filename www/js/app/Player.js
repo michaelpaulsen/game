@@ -80,9 +80,14 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 		var map = Map.getInstance();
 		var item = Item.getInstance();
 		var checkInput = function () {
+			var tile_class = $(".block_10x10").attr("class").split(" ")[2] == "tile-water";
+			//console.log(tile_class );
 			//console.log( input.keys.down );
 			//console.log( input.keys.last );
 			//console.log( input.keys.down[ 65 ] && input.keys.last === 65 );
+			if(tile_class){
+				location.reload();
+			}
 			if ( (( input.keys.down[ 38 ] && input.keys.last === 38 ) ||
 				( input.keys.down[ 87 ] && input.keys.last === 87 )) && !$(".block_10x9").hasClass("tile-water") ) {
 				// UP
@@ -92,7 +97,7 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 				pos.move = true;
 			}
 			if ( (( input.keys.down[ 37 ] && input.keys.last === 37 ) ||
-				( input.keys.down[ 65 ] && input.keys.last === 65 )) && !$(".block_9x10").hasClass("tile-water") ) {
+				( input.keys.down[ 65 ] && input.keys.last === 65 )) && !$(".block_9x10").hasClass("tile-water")) {
 				// LEFT
 				pos.x -= 1;
 				if ( pos.x < 0 ) { pos.x = map.max.x-1; }
