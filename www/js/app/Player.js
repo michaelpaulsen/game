@@ -83,7 +83,7 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 			return $(".block_"+ (10+rx) +"x"+(10+ry)).attr("class").split(" ")[2];
 		}
 		var checkInput = function () {
-		console.log( );
+		//console.log( );
 			var blockIsWater = getTileIdByPlayerPos(0,0) == "tile-water";
 			//console.log(blockIsWater );
 			//console.log( input.keys.down );
@@ -93,33 +93,51 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 				location.reload();
 			}
 			if ( (( input.keys.down[ 38 ] && input.keys.last === 38 ) ||
-				( input.keys.down[ 87 ] && input.keys.last === 87 )) && getTileIdByPlayerPos(0,-1) != "tile-water" ) {
-				// UP
-				pos.y -=  1;
-				
-				if ( pos.y < 0 ) { pos.y = map.max.y-1; }
-				pos.move = true;
+				( input.keys.down[ 87 ] && input.keys.last === 87 ))){
+				if (getTileIdByPlayerPos(0,-1) != "tile-water" ) {
+					// UP
+					pos.y -=  1;
+					
+					if ( pos.y < 0 ) {
+						pos.y = map.max.y-1;
+					}
+					pos.move = true;
+				}else{
+					screen.console("error", "you can not move there");
+				}
 			}
 			if ( (( input.keys.down[ 37 ] && input.keys.last === 37 ) ||
-				( input.keys.down[ 65 ] && input.keys.last === 65 )) && getTileIdByPlayerPos(-1,0) != "tile-water") {
-				// LEFT
-				pos.x -= 1;
-				if ( pos.x < 0 ) { pos.x = map.max.x-1; }
-				pos.move = true;
+				( input.keys.down[ 65 ] && input.keys.last === 65 ))){
+			    if(getTileIdByPlayerPos(-1,0) != "tile-water") {
+					// LEFT
+					pos.x -= 1;
+					if ( pos.x < 0 ) { pos.x = map.max.x-1; }
+					pos.move = true;
+				}else{
+					screen.console("error", "you can not move there");
+				}
 			}
 			if ( (( input.keys.down[ 40 ] && input.keys.last === 40 ) ||
-				( input.keys.down[ 83 ] && input.keys.last === 83 )) && getTileIdByPlayerPos(0,1) != "tile-water" ) {
-				// DOWN
-				pos.y += 1;
-				if ( pos.y > map.max.y-1 ) { pos.y = 0; }
-				pos.move = true;
+				( input.keys.down[ 83 ] && input.keys.last === 83 ))){
+				if(getTileIdByPlayerPos(0,1) != "tile-water" ) {
+					// DOWN
+					pos.y += 1;
+					if ( pos.y > map.max.y-1 ) { pos.y = 0; }
+					pos.move = true;
+				}else{
+					screen.console("error", "you can not move there");
+				}
 			}
 			if ( (( input.keys.down[ 39 ] && input.keys.last === 39 ) ||
-				( input.keys.down[ 68 ] && input.keys.last === 68 ))&& getTileIdByPlayerPos(1,0) != "tile-water" ) {
-				// RIGHT (d|D)
-				pos.x += 1;
-				if ( pos.x > map.max.x-1 ) { pos.x = 0; }
-				pos.move = true;
+				( input.keys.down[ 68 ] && input.keys.last === 68 ))){
+				if(getTileIdByPlayerPos(1,0) != "tile-water" ) {
+					// RIGHT (d|D)
+					pos.x += 1;
+					if ( pos.x > map.max.x-1 ) { pos.x = 0; }
+					pos.move = true;
+				}else{
+					screen.console("error", "you can not move there");
+				}
 			}
 			if ( pos.move )
 			{

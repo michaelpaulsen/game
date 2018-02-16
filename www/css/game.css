@@ -257,3 +257,10 @@ shore-n.shore-w {
     background: url('../img/player.png') no-repeat center center rgba(0, 117, 30, 0);
 	*/
 }
+.error{
+color : #f00;
+}
+
+.error::before{
+	content: "* ";
+}

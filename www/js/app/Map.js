@@ -53,18 +53,18 @@ define([
 		}
 
 		
-												/*
 		this.getNearbyTileId = function( objCoord, objDirection ) {
 			var objDest = {
 				x: objCoord.x + objDirection.x,
 				y: objCoord.y + objDirection.y
 			};
-			if ( objDest.x < 0 ) { objDest.x += world.max.x; }
-			if ( objDest.x > world.max.x-1 ) { objDest.x -= world.max.x; }
-			if ( objDest.y < 0 ) { objDest.y += world.max.y; }
-			if ( objDest.y > world.max.y-1 ) { objDest.y -= world.max.y; }
+			if ( objDest.x < 0 ) { objDest.x += this.max.x; }
+			if ( objDest.x > this.max.x-1 ) { objDest.x -= this.max.x; }
+			if ( objDest.y < 0 ) { objDest.y += this.max.y; }
+			if ( objDest.y > this.max.y-1 ) { objDest.y -= this.max.y; }
 			return this.blocks[ objDest.x ][ objDest.y ];
 		};
+			/*
 		*/
 	
 };
