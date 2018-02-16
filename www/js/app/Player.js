@@ -79,17 +79,21 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 		var screen = Screen.getInstance();
 		var map = Map.getInstance();
 		var item = Item.getInstance();
+		var getTileIdByPlayerPos = function(rx,ry){
+			return $(".block_"+ (10+rx) +"x"+(10+ry)).attr("class").split(" ")[2];
+		}
 		var checkInput = function () {
-			var tile_class = $(".block_10x10").attr("class").split(" ")[2] == "tile-water";
-			//console.log(tile_class );
+		console.log( );
+			var blockIsWater = getTileIdByPlayerPos(0,0) == "tile-water";
+			//console.log(blockIsWater );
 			//console.log( input.keys.down );
 			//console.log( input.keys.last );
 			//console.log( input.keys.down[ 65 ] && input.keys.last === 65 );
-			if(tile_class){
+			if(blockIsWater){
 				location.reload();
 			}
 			if ( (( input.keys.down[ 38 ] && input.keys.last === 38 ) ||
-				( input.keys.down[ 87 ] && input.keys.last === 87 )) && !$(".block_10x9").hasClass("tile-water") ) {
+				( input.keys.down[ 87 ] && input.keys.last === 87 )) && getTileIdByPlayerPos(0,-1) != "tile-water" ) {
 				// UP
 				pos.y -=  1;
 				
@@ -97,21 +101,21 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 				pos.move = true;
 			}
 			if ( (( input.keys.down[ 37 ] && input.keys.last === 37 ) ||
-				( input.keys.down[ 65 ] && input.keys.last === 65 )) && !$(".block_9x10").hasClass("tile-water")) {
+				( input.keys.down[ 65 ] && input.keys.last === 65 )) && getTileIdByPlayerPos(-1,0) != "tile-water") {
 				// LEFT
 				pos.x -= 1;
 				if ( pos.x < 0 ) { pos.x = map.max.x-1; }
 				pos.move = true;
 			}
 			if ( (( input.keys.down[ 40 ] && input.keys.last === 40 ) ||
-				( input.keys.down[ 83 ] && input.keys.last === 83 )) && !$(".block_10x11").hasClass("tile-water") ) {
+				( input.keys.down[ 83 ] && input.keys.last === 83 )) && getTileIdByPlayerPos(0,1) != "tile-water" ) {
 				// DOWN
 				pos.y += 1;
 				if ( pos.y > map.max.y-1 ) { pos.y = 0; }
 				pos.move = true;
 			}
 			if ( (( input.keys.down[ 39 ] && input.keys.last === 39 ) ||
-				( input.keys.down[ 68 ] && input.keys.last === 68 ))&& !$(".block_11x10").hasClass("tile-water") ) {
+				( input.keys.down[ 68 ] && input.keys.last === 68 ))&& getTileIdByPlayerPos(1,0) != "tile-water" ) {
 				// RIGHT (d|D)
 				pos.x += 1;
 				if ( pos.x > map.max.x-1 ) { pos.x = 0; }
