@@ -216,7 +216,9 @@ define(["jquery"], function($) {
 		{
 			var msgDiv = document.createElement('div');
 			$( msgDiv ).addClass( type ).html( msg );
-			$('#gameConsole').empty().append( msgDiv );
+			
+			$('#gameConsole').append( msgDiv ).scrollTop( $('#gameConsole')[0].scrollHeight );
+			/*$('#gameConsole').empty().append( msgDiv );*/
 
 		}
 		this.debug = function()

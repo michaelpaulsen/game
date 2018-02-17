@@ -121,7 +121,13 @@ body {
 #gameConsole .info {
 	color: #996;
 }
+#gameConsole .error{
+color : #f00;
+}
 
+#gameConsole .error::before{
+	content: "* ";
+}
 
 
 .tile-water {
@@ -256,11 +262,4 @@ shore-n.shore-w {
 	background-color: rgba( 255, 0, 0, 0.5 );/*
     background: url('../img/player.png') no-repeat center center rgba(0, 117, 30, 0);
 	*/
-}
-.error{
-color : #f00;
-}
-
-.error::before{
-	content: "* ";
 }

@@ -80,7 +80,7 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 		var map = Map.getInstance();
 		var item = Item.getInstance();
 		var getTileIdByPlayerPos = function(rx,ry){
-			return $(".block_"+ (10+rx) +"x"+(10+ry)).attr("class").split(" ")[2];
+			return ($(".block_"+ (10+rx) +"x"+(10+ry)).attr("class").split(" "))[2];
 		}
 		var checkInput = function () {
 		//console.log( );
@@ -146,12 +146,9 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 				screen.drawMap();
 				screen.debug( pos.x, pos.y );
 			}
-			$(".player")
 		};
 	
-		var inputInt =
-		    
-			setInterval(
+		var inputInt = setInterval(
 				checkInput,
 				300 * ( Math.pow( .95, this.attribute.speed ) + .2 )
 			);
