@@ -39,7 +39,10 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 				heal : 1,
 				maxHp: 10
 			},
-			wisdom: 10
+			wisdom: {
+				mana:10,
+				rest:10
+			}
 		};
 
 		this.skill = {
@@ -83,18 +86,23 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 			return ($(".block_"+ (10+rx) +"x"+(10+ry)).attr("class").split(" "))[2];
 		}
 		var checkInput = function () {
-		//console.log( );
-			var blockIsWater = getTileIdByPlayerPos(0,0) == "tile-water";
-			//console.log(blockIsWater );
+			/** movment code*/
+			var blockIsValid = (getTileIdByPlayerPos(0,0) == "tile-water") && (getTileIdByPlayerPos(0,0) == "tile-mountain");
+			
+			var upIsVaild = (getTileIdByPlayerPos(0,-1) != "tile-water")&& (getTileIdByPlayerPos(0,-1) != "tile-mountain");
+			var leftIsVaild = (getTileIdByPlayerPos(-1,0) != "tile-water") && (getTileIdByPlayerPos(-1,0) != "tile-mountain");
+			var downIsVaild = (getTileIdByPlayerPos(0,1) != "tile-water") && (getTileIdByPlayerPos(0,1) != "tile-mountain");
+			var rightIsVaild = (getTileIdByPlayerPos(1,0) != "tile-water") && (getTileIdByPlayerPos(1,0) != "tile-mountain");
 			//console.log( input.keys.down );
 			//console.log( input.keys.last );
 			//console.log( input.keys.down[ 65 ] && input.keys.last === 65 );
-			if(blockIsWater){
+			if(blockIsValid){
+				/** reloade if the block is not one you can walk on ( triggers any time not just when the game firt starts) */
 				location.reload();
 			}
-			if ( (( input.keys.down[ 38 ] && input.keys.last === 38 ) ||
-				( input.keys.down[ 87 ] && input.keys.last === 87 ))){
-				if (getTileIdByPlayerPos(0,-1) != "tile-water" ) {
+			if ( ( input.keys.down[ 38 ] && input.keys.last === 38 ) || /** if the key is  (w||W||^)*/
+				( input.keys.down[ 87 ] && input.keys.last === 87 )){
+				if ( upIsVaild ) {/** and the block one up from you is valid then move up*/
 					// UP
 					pos.y -=  1;
 					
@@ -106,9 +114,9 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 					screen.console("error", "you can not move there");
 				}
 			}
-			if ( (( input.keys.down[ 37 ] && input.keys.last === 37 ) ||
-				( input.keys.down[ 65 ] && input.keys.last === 65 ))){
-			    if(getTileIdByPlayerPos(-1,0) != "tile-water") {
+			if ( ( input.keys.down[ 37 ] && input.keys.last === 37 ) ||
+				( input.keys.down[ 65 ] && input.keys.last === 65 )){
+			    if( leftIsVaild ) {
 					// LEFT
 					pos.x -= 1;
 					if ( pos.x < 0 ) { pos.x = map.max.x-1; }
@@ -117,9 +125,9 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 					screen.console("error", "you can not move there");
 				}
 			}
-			if ( (( input.keys.down[ 40 ] && input.keys.last === 40 ) ||
-				( input.keys.down[ 83 ] && input.keys.last === 83 ))){
-				if(getTileIdByPlayerPos(0,1) != "tile-water" ) {
+			if ( ( input.keys.down[ 40 ] && input.keys.last === 40 ) ||
+				( input.keys.down[ 83 ] && input.keys.last === 83 )){
+				if( downIsVaild ) {
 					// DOWN
 					pos.y += 1;
 					if ( pos.y > map.max.y-1 ) { pos.y = 0; }
@@ -128,9 +136,9 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 					screen.console("error", "you can not move there");
 				}
 			}
-			if ( (( input.keys.down[ 39 ] && input.keys.last === 39 ) ||
-				( input.keys.down[ 68 ] && input.keys.last === 68 ))){
-				if(getTileIdByPlayerPos(1,0) != "tile-water" ) {
+			if ( ( input.keys.down[ 39 ] && input.keys.last === 39 ) ||
+				( input.keys.down[ 68 ] && input.keys.last === 68 )){
+				if( rightIsVaild ) {
 					// RIGHT (d|D)
 					pos.x += 1;
 					if ( pos.x > map.max.x-1 ) { pos.x = 0; }
