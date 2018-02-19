@@ -98,6 +98,7 @@ define(["jquery"], function($) {
 				$( playerDiv ).append( '<div class="player-name">' + player.stat.name + '</div>' );/* displays the name of the player*/
 				$( playerDiv ).append( '<div class="max-hp">'+/*health bar out line*/'<div class="current-hp" style="width:'/*health bar */ + hp + '%;"></div><div class="current-hp-text">'+hp+'%</div></div>' );
 				$( playerDiv ).append( '<div class="max-mp">'/*magic bar out line*/+'<div class="current-mp" style="width:'/*magic bar*/ +mp+ '%;"></div><div class="current-mp-text">'+mp+'%</div></div>' );
+<<<<<<< HEAD
 				for(var s = 0; s < player.backpack.length; s++){
 					if(player.backpack[s].amount>1){
 						$( playerDiv ).append( '<div class="item'+player.backpack[s].name+';  display:inline-block;">' + player.backpack[s].name + ' x:' + player.backpack[s].amount  + '<br> <div class = "'+ (s + 1) + ' " style="background-image:'+player.backpack[s].src + '; width:'+h+'px; height:'+h+'px; background-size:100%; background-repeat: no-repeat; display:inline-block;"></div></div>' );
@@ -105,6 +106,9 @@ define(["jquery"], function($) {
 						$( playerDiv ).append( '<div class="item'+player.backpack[s].name+';  ">' + player.backpack[s].name + '<br> <div class = "'+ (s + 1) + ' " style="background-image:'+player.backpack[s].src + '; width:'+h+'px; height:'+h+'px; background-size:100%; background-repeat: no-repeat; display:inline-block;"></div></div>' );
 					}
 				}
+=======
+
+>>>>>>> 0012546a7a410dff8129fa918d483409dae1340b
 				$( '#playerBar' ).append( playerDiv );
 			}
 		};
