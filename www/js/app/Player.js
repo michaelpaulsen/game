@@ -13,6 +13,7 @@ define([
 			race: "Human",
 			type: "knight",
 			gender: "male",
+			steps: 0
 			
 		};
 		this.backpack = [];
@@ -87,7 +88,7 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 		}
 		var checkInput = function () {
 			/** movment code*/
-			var blockIsValid = (getTileIdByPlayerPos(0,0) == "tile-water") && (getTileIdByPlayerPos(0,0) == "tile-mountain");
+			var blockIsInvalid = (getTileIdByPlayerPos(0,0) == "tile-water") && (getTileIdByPlayerPos(0,0) == "tile-mountain");
 			
 			var upIsVaild = (getTileIdByPlayerPos(0,-1) != "tile-water")&& (getTileIdByPlayerPos(0,-1) != "tile-mountain");
 			var leftIsVaild = (getTileIdByPlayerPos(-1,0) != "tile-water") && (getTileIdByPlayerPos(-1,0) != "tile-mountain");
@@ -96,9 +97,13 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 			//console.log( input.keys.down );
 			//console.log( input.keys.last );
 			//console.log( input.keys.down[ 65 ] && input.keys.last === 65 );
-			if(blockIsValid){
+			if(blockIsInvalid){
 				/** reloade if the block is not one you can walk on ( triggers any time not just when the game firt starts) */
 				location.reload();
+			}
+			if(this.stat.steps >= 100){
+				this.stat.steps -= 100;
+				screen.console("info", this.stat.steps);
 			}
 			if ( ( input.keys.down[ 38 ] && input.keys.last === 38 ) || /** if the key is  (w||W||^)*/
 				( input.keys.down[ 87 ] && input.keys.last === 87 )){
@@ -110,6 +115,7 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 						pos.y = map.max.y-1;
 					}
 					pos.move = true;
+					this.stat.steps++;
 				}else{
 					screen.console("error", "you can not move there");
 				}
@@ -120,7 +126,9 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 					// LEFT
 					pos.x -= 1;
 					if ( pos.x < 0 ) { pos.x = map.max.x-1; }
-					pos.move = true;
+				    pos.move = true;
+				    this.stat.steps++;
+
 				}else{
 					screen.console("error", "you can not move there");
 				}
@@ -131,6 +139,8 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 					// DOWN
 					pos.y += 1;
 					if ( pos.y > map.max.y-1 ) { pos.y = 0; }
+					this.stat.steps++;
+
 					pos.move = true;
 				}else{
 					screen.console("error", "you can not move there");
@@ -143,6 +153,8 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 					pos.x += 1;
 					if ( pos.x > map.max.x-1 ) { pos.x = 0; }
 					pos.move = true;
+					this.stat.steps++;
+
 				}else{
 					screen.console("error", "you can not move there");
 				}
