@@ -2,10 +2,12 @@ define([
 	'app/Input',
 	'app/Screen',
 	'app/Map',
-	'app/Item'
-	], function (Input, Screen, Map, Item) {
+	'app/Item',
+	'app/battle'
+	], function (Input, Screen, Map, Item,battle) {
 	//console.log(item);
 	//var item = item;
+			var seed = 0;
 	var Player = function () {
 	
 		this.stat = {
@@ -16,8 +18,8 @@ define([
 			steps: 0
 			
 		};
-		this.backpack = [];
-
+		this.backpack = [];// backpack where you hold all your stuff
+		this.moves = []; // battle moves that your player can preform
 /*
 strength - hit power, weight carrying ability
 endurance - exersion over time - (maybe options to enable power attacks/spells (wears off slower for high endurance)
@@ -88,23 +90,27 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 		}
 		var checkInput = function () {
 			/** movment code*/
-			var blockIsInvalid = (getTileIdByPlayerPos(0,0) == "tile-water") && (getTileIdByPlayerPos(0,0) == "tile-mountain");
-			
-			var upIsVaild = (getTileIdByPlayerPos(0,-1) != "tile-water")&& (getTileIdByPlayerPos(0,-1) != "tile-mountain");
+	
+			var blockIsInvalid = (getTileIdByPlayerPos(0,0) == "tile-water") || (getTileIdByPlayerPos(0,0) == "tile-mountain");
+			var upIsVaild = (getTileIdByPlayerPos(0,-1) != "tile-water") && (getTileIdByPlayerPos(0,-1) != "tile-mountain");
 			var leftIsVaild = (getTileIdByPlayerPos(-1,0) != "tile-water") && (getTileIdByPlayerPos(-1,0) != "tile-mountain");
 			var downIsVaild = (getTileIdByPlayerPos(0,1) != "tile-water") && (getTileIdByPlayerPos(0,1) != "tile-mountain");
 			var rightIsVaild = (getTileIdByPlayerPos(1,0) != "tile-water") && (getTileIdByPlayerPos(1,0) != "tile-mountain");
-			//console.log( input.keys.down );
-			//console.log( input.keys.last );
+			/*alert("up: " + upIsVaild + " left: " + leftIsVaild + " down: " + downIsVaild + " right: " + rightIsVaild); 
+			console.log( input.keys.down );
+			console.log( input.keys.last );
+			*/
+			//console.log( input.keys.down[ 65 ] && input.keys.last === 65 );
 			//console.log( input.keys.down[ 65 ] && input.keys.last === 65 );
 			if(blockIsInvalid){
-				/** reloade if the block is not one you can walk on ( triggers any time not just when the game firt starts) */
-				location.reload();
+				location.search = "?seed=" + seed;
+				seed++;
+				blockIsInvalid = (getTileIdByPlayerPos(0,0) == "tile-water") && (getTileIdByPlayerPos(0,0) == "tile-mountain");
 			}
-			if(this.stat.steps >= 100){
-				this.stat.steps -= 100;
-				screen.console("info", this.stat.steps);
-			}
+			//if(this.stat.steps >= 100){
+				//this.stat.steps -= 100;
+				//screen.console("info", this.stat.steps);
+			//}
 			if ( ( input.keys.down[ 38 ] && input.keys.last === 38 ) || /** if the key is  (w||W||^)*/
 				( input.keys.down[ 87 ] && input.keys.last === 87 )){
 				if ( upIsVaild ) {/** and the block one up from you is valid then move up*/
@@ -115,7 +121,6 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 						pos.y = map.max.y-1;
 					}
 					pos.move = true;
-					this.stat.steps++;
 				}else{
 					screen.console("error", "you can not move there");
 				}
@@ -126,10 +131,8 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 					// LEFT
 					pos.x -= 1;
 					if ( pos.x < 0 ) { pos.x = map.max.x-1; }
-				    pos.move = true;
-				    this.stat.steps++;
-
-				}else{
+						pos.move = true;
+					}else{
 					screen.console("error", "you can not move there");
 				}
 			}
@@ -139,7 +142,7 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 					// DOWN
 					pos.y += 1;
 					if ( pos.y > map.max.y-1 ) { pos.y = 0; }
-					this.stat.steps++;
+					
 
 					pos.move = true;
 				}else{
@@ -153,7 +156,7 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 					pos.x += 1;
 					if ( pos.x > map.max.x-1 ) { pos.x = 0; }
 					pos.move = true;
-					this.stat.steps++;
+					
 
 				}else{
 					screen.console("error", "you can not move there");
@@ -167,19 +170,19 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 				screen.debug( pos.x, pos.y );
 			}
 		};
-<<<<<<< HEAD
+/*<<<<<<< HEAD
 	
 		var inputInt = setInterval(
 =======
-
 		console.log(
 				'player speed delay',
 				300 * ( Math.pow( .95, this.attribute.speed ) + .2 )
 		);
+*/
 		var inputInt =
 
 			setInterval(
->>>>>>> 0012546a7a410dff8129fa918d483409dae1340b
+//>>>>>>> 0012546a7a410dff8129fa918d483409dae1340b
 				checkInput,
 				300 * ( Math.pow( .95, this.attribute.speed ) + .2 )
 			);
