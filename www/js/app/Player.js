@@ -50,7 +50,12 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 			wisdom: {
 				mana:10,
 				rest:10
+			},
+			level:{
+				current:0;
+				next:1000; 
 			}
+
 		};
 
 		this.skill = {
