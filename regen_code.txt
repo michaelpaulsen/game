@@ -1,0 +1,15 @@
+
+		var regen = function(c){
+			if( c === "health"){
+				if((this.condition.health <= this.attribute.vitality.maxHp)){
+					this.condition.health += (this.attribute.vitality.heal / this.attribute.vitality.maxHp);
+					console.count((this.condition.health <= this.attribute.vitality.maxHp));
+
+				}
+			}else{
+				/*if(this.condition.mana != this){
+					this.condition.mana += 100*(this.attribute.wisdom.mana / this.condition.magic);
+				}*/
+			}
+
+		};

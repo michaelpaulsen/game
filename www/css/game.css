@@ -1,9 +1,11 @@
 html {
   box-sizing: border-box;
 }
+
 *, *:before, *:after {
   box-sizing: inherit;
 }
+
 
 body {
 	background-color: #000;
@@ -11,10 +13,12 @@ body {
 	padding: 0;
 }
 
+
 #screen {
 	text-align: center;
 	margin: 2vh 0;
 }
+
 
 #playerBar,
 #infoBar {
@@ -31,6 +35,7 @@ body {
 	width: 17vw;
 	width: 17vmin;
 }
+
 #playerBar .max-hp,
 #playerBar .max-mp {
     border: 1px solid red;
@@ -41,18 +46,22 @@ body {
     margin: 1px auto;
     margin-bottom: 5px;
 }
+
 #playerBar .current-hp,
 #playerBar .current-mp {
     background-color:red;
     position:absolute;
     height: 100%;
 }
+
 #playerBar .max-mp {
     border-color: blue;
 }
+
 #playerBar .current-mp {
     background-color:blue;
 }
+
 #playerBar .current-hp-text,
 #playerBar .current-mp-text
 {
@@ -60,6 +69,7 @@ body {
     color: white;
     width: 100%;
 }
+
 #mapGrid {
 	border: 1px solid blue;
 	display: inline-block;
@@ -69,9 +79,11 @@ body {
 	width: 60vw;
 	width: 60vmin;
 }
+
 #mapGrid .grid-row {
 	height: 4.76190476%;
 }
+
 #mapGrid .cell {
 	/* border: 1px solid rgba(255, 0, 0, 0.1); */
 	background-size: 100% 100%;
@@ -82,10 +94,12 @@ body {
 	text-align: center;
 	width: 4.76190476%;
 }
+
 #mapGrid .cell div {
 	height: 100%;
 	width: 100%;
 }
+
 
 #gameConsole {
 	border: 1px solid blue;
@@ -99,111 +113,153 @@ body {
 	width: 98vw;
 	width: 98vmin;
 }
+
 #gameConsole .debug {
 	color: #666;
 }
+
 #gameConsole .info {
 	color: #996;
+}
+#gameConsole .error{
+color : #f00;
+}
+
+#gameConsole .error::before{
+	content: "* ";
 }
 
 
 .tile-water {
 	background-color: rgba(0, 255, 255, 1.0);
 }
+
 .tile-grass {
 	background-color: rgba(0, 117, 30, 1);
 }
+
 .tile-monster {
-	background-color: rgba(20, 117, 30, 1);
+	background-color: rgba(80, 117, 30, 1);
 }
 
-.tile-water.shore-n {
+
+.shore-n {
 	background: url('../img/shore-n.gif') no-repeat center top rgba(78, 78, 255, 1);
+	height: 20px;
+	width: 100%;
 }
-.tile-water.shore-e {
+
+.shore-e {
 	background: url('../img/shore-e.gif') no-repeat right center rgba(78, 78, 255, 1);
+	width: 20px;
+	height: 100%;
 }
-.tile-water.shore-s {
+
+.shore-s {
 	background: url('../img/shore-s.gif') no-repeat center bottom rgba(78, 78, 255, 1);
+	height: 20px;
+	width: 100%;
 }
-.tile-water.shore-w {
+
+.shore-w {
 	background: url('../img/shore-w.gif') no-repeat left center rgba(78, 78, 255, 1);
-}
-.tile-water.shore-n.shore-w {
+	width: 20px;
+	height: 100%;
+
+	}
+
+shore-n.shore-w {
 	background-image: url('../img/shore-n.gif'), url('../img/shore-w.gif');
 	background-position: center top, left center;
 }
+
 .tile-water.shore-s.shore-e {
 	background-image: url('../img/shore-s.gif'), url('../img/shore-e.gif');
 	background-position: center bottom, right center;
 }
+
 .tile-water.shore-n.shore-e {
 	background-image: url('../img/shore-n.gif'), url('../img/shore-e.gif');
 	background-position: center top, right center;
 }
+
 .tile-water.shore-s.shore-w {
 	background-image: url('../img/shore-s.gif'), url('../img/shore-w.gif');
 	background-position: center bottom, left center;
 }
 
+
 .tile-water.shore-n.shore-s {
 	background-image: url('../img/shore-n.gif'), url('../img/shore-s.gif');
 	background-position: center top, center bottom;
 }
+
 .tile-water.shore-e.shore-w {
 	background-image: url('../img/shore-e.gif'), url('../img/shore-w.gif');
 	background-position: right center, left center;
 }
+
 .tile-water.shore-n.shore-e.shore-s {
 	background-image: url('../img/shore-n.gif'), url('../img/shore-e.gif'), url('../img/shore-s.gif');
 	background-position: center top, right center, center bottom;
 }
+
 .tile-water.shore-w.shore-e.shore-s {
 	background-image: url('../img/shore-w.gif'), url('../img/shore-e.gif'), url('../img/shore-s.gif');
 	background-position: left center, right center, center bottom;
 }
+
 .tile-water.shore-w.shore-n.shore-s {
 	background-image: url('../img/shore-w.gif'), url('../img/shore-n.gif'), url('../img/shore-s.gif');
 	background-position: left center, center top, center bottom;
 }
+
 .tile-water.shore-w.shore-n.shore-e {
 	background-image: url('../img/shore-w.gif'), url('../img/shore-n.gif'), url('../img/shore-e.gif');
 	background-position: left center, center top, right center;
 }
+
 .tile-water.shore-w.shore-n.shore-e.shore-s {
 	background-image: url('../img/shore-w.gif'), url('../img/shore-n.gif'), url('../img/shore-e.gif'), url('../img/shore-s.gif');
 	background-position: left center, center top, right center, center bottom;
 }
 
+
 .tile-forest {
 	background: url('../img/tree.png') no-repeat center center rgba(0, 117, 30, 1);
 }
+
 
 .tile-mountain {
 	background: url('../img/mountain.png') no-repeat center center rgba(0, 117, 30, 1);
 }
 
+
 .tile-cave {
 	background: url('../img/cave.png') no-repeat center center rgba(0, 117, 30, 1);
 }
-    
+
+
 .tile-lighthouse{
     background: url('../img/lighthouse.png') no-repeat center center rgba(0, 117, 30, 1);
     
 }
-    
+
+
 .tile-town{
     background: url('../img/town.png') no-repeat center center rgba(0, 117, 30, 1);
     
 }
+
 
 .tile-temple{
     background: url('../img/temple.png') no-repeat center center rgba(0, 117, 30, 1);
     
 }
 
-.player {
-	/*background-color: rgba( 255, 0, 0, 0.5 );*/
-    background: url('../img/player.png') no-repeat center center rgba(0, 117, 30, 0);
-}
 
+.player {
+	background-color: rgba( 255, 0, 0, 0.5 );/*
+    background: url('../img/player.png') no-repeat center center rgba(0, 117, 30, 0);
+	*/
+}

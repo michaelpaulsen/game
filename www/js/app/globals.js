@@ -64,7 +64,11 @@ function getParameterByName(name) {
         results = regex.exec(location.search);
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
-
+function save() = {
+	var saves = window.JSON.parse(localStorage.getItem("saves"));
+	saves.push([player.name,player.flags/*and/or player.items */,player.pos]);
+	localStorage.setItem("saves,window.JSON.stringify(saves));
+}
 var game;
 (function($){
 	$(document).ready( function() {
