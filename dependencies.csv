@@ -1,0 +1,34 @@
+"file ","dependencies ",,
+"Generator.js","none",,
+,,,
+"input","none",,
+,,,
+"screen.js","none",,
+,,,
+"player.js","app/Input',","none",
+,"app/Screen',","none",
+,"app/Map',","app/Generator",
+,"app/Item',","app/player",
+,"app/battle'",,
+,,,
+"mapWorld.js","app/Map',","app/Generator",
+,,,
+"map.js","app/Generator",,
+,,,
+"item.js","app/player","app/Input',","none"
+,,"app/Screen',","none"
+,,"app/Map',","app/Generator"
+,,"app/battle'",
+,,,
+"main.js","jquery',","none",
+,"'util',","none",
+,"	'app/Screen',","none",
+,"'app/MapWorld',","app/Map',","app/Generator"
+,,,
+,"	'app/Player',","app/Input',","none"
+,,"app/Screen',","none"
+,,"app/Map',","app/Generator"
+,,"app/Item',","app/player"
+,,"app/battle'",
+,,,
+,"	'app/Input'","none",
