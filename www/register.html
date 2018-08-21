@@ -1,0 +1,36 @@
+<html>
+	<head>
+	<script src = "./js/lib/jquery.js"></script>
+	</head>
+	<body>
+		<form id = "main" action = "./app.html" method = 'get' >
+			<p> name </p>
+			<input type = 'text' id = 'name' >
+			<p> race </p>
+			<select id = "race">
+				<option value="human">human</option>
+				<option value="dwarf">dwarf</option>
+				<option value="elf">elf</option>
+			</select>
+			<p>type</p>
+			<select id = "type">
+				<option value="tank">tank</option>
+				<option value="acrhcer">acrhcer</option>
+				<option value="assanssin">assansin</option>
+			</select>
+			<button type = "submit">submit</button>
+		</form>
+		<script>
+			$("#main").on("submit", function(e){
+				localStorage.setItem("name", $("#name").val());
+				localStorage.setItem("race", $("#race").val());
+				localStorage.setItem("type", $("#type").val());
+				//console.log(localStorage.getItem('name'));
+				//console.log(localStorage.getItem('race'));
+				//console.log(localStorage.getItem('type'));
+				//console.log($("#race").val());
+				//console.log($("#type").val());
+			});
+		</script>
+	<body>
+</html>

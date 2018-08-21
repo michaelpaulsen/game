@@ -7,9 +7,14 @@ define([
 	], function (Input, Screen, Map, Item,battle) {
 	//console.log(item);
 	//var item = item;
-			var seed = 0;
+			var seed = Math.round(Math.random()*Math.pow(10,10));
 	var Player = function () {
 	
+		var input = Input.getInstance();
+		var screen = Screen.getInstance();
+		var map = Map.getInstance();
+		var item = Item.getInstance();
+
 		this.stat = {
 			name: 'Michael',
 			race: "Human",
@@ -74,24 +79,29 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 
 		this.hp = this.condition.health;
 		this.mp = this.condition.mana;
+		//var initialPosition = map.findNearestFeature(2,0,0);
 		var pos = {
 			x: 0,
 			y: 0,
 			move: false
 		};
+		
 
 		this.pos = pos;
-		var input = Input.getInstance();
-		var screen = Screen.getInstance();
-		var map = Map.getInstance();
-		var item = Item.getInstance();
+
 		var getTileIdByPlayerPos = function(rx,ry){
-			return ($(".block_"+ (10+rx) +"x"+(10+ry)).attr("class").split(" "))[2];
-		}
+			if(document.readyState == "complete") {
+				var blockClass = $(".block_"+ (10+rx) +"x"+(10+ry)).attr("class");
+				if ( typeof blockClass == "string" ) {
+					return blockClass.split(" ")[2];
+				}
+			}
+		};
+
 		var checkInput = function () {
 			/** movment code*/
 	
-			var blockIsInvalid = (getTileIdByPlayerPos(0,0) == "tile-water") || (getTileIdByPlayerPos(0,0) == "tile-mountain");
+			var blockIsInvalid = ((getTileIdByPlayerPos(0,0) == "tile-water") || (getTileIdByPlayerPos(0,0) == "tile-mountain"));
 			var upIsVaild = (getTileIdByPlayerPos(0,-1) != "tile-water") && (getTileIdByPlayerPos(0,-1) != "tile-mountain");
 			var leftIsVaild = (getTileIdByPlayerPos(-1,0) != "tile-water") && (getTileIdByPlayerPos(-1,0) != "tile-mountain");
 			var downIsVaild = (getTileIdByPlayerPos(0,1) != "tile-water") && (getTileIdByPlayerPos(0,1) != "tile-mountain");
@@ -102,13 +112,17 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 			*/
 			//console.log( input.keys.down[ 65 ] && input.keys.last === 65 );
 			//console.log( input.keys.down[ 65 ] && input.keys.last === 65 );
+			/*
 			if(blockIsInvalid){
 				location.search = "?seed=" + seed;
-				seed++;
+				// sets tje search val to the current random seed and indonin so reloads the page makeing a new random seed ;)
+				//seed++;
 				blockIsInvalid = (getTileIdByPlayerPos(0,0) == "tile-water") && (getTileIdByPlayerPos(0,0) == "tile-mountain");
 			}
+			*/
 			//if(this.stat.steps >= 100){
 				//this.stat.steps -= 100;
+				//screen.console("info", this.stat.steps);
 				//screen.console("info", this.stat.steps);
 			//}
 			if ( ( input.keys.down[ 38 ] && input.keys.last === 38 ) || /** if the key is  (w||W||^)*/
@@ -127,7 +141,7 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 			}
 			if ( ( input.keys.down[ 37 ] && input.keys.last === 37 ) ||
 				( input.keys.down[ 65 ] && input.keys.last === 65 )){
-			    if( leftIsVaild ) {
+				   if( leftIsVaild ) {
 					// LEFT
 					pos.x -= 1;
 					if ( pos.x < 0 ) { pos.x = map.max.x-1; }
