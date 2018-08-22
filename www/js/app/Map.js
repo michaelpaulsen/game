@@ -113,7 +113,7 @@ define([
 							}else{*/
 							//console.log("Find:" + feature, "Current (" + Ix + "," + Iy + "):", this.blocks[Ix][Iy]);
 							//	$(".block_"+ (Ix) +"x"+(Iy)).addClass("checked");
-//							console.log("iy: " + Iy, "yx: "+ Ix, "current tile: " + this.tiles[this.blocks[Ix][Iy]], "target title: " + this.tiles[feature], "iteration: " + i, "found: " + found, "is the block: " + this.blocks[Iy][Ix] == feature );
+							console.log("iy: " + Iy, "yx: "+ Ix, "current tile: " + this.tiles[this.blocks[Ix][Iy]], "target title: " + this.tiles[feature], "iteration: " + i, "found: " + found, "is the block: " + this.blocks[Iy][Ix] == feature );
 									if( this.blocks[Iy][Ix] == feature ){
 									console.log(Ix,Iy);
 									found = true; 

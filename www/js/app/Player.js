@@ -50,7 +50,12 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 			wisdom: {
 				mana:10,
 				rest:10
+			},
+			level:{
+				current:0,
+				next:1000 
 			}
+
 		};
 
 		this.skill = {
@@ -79,10 +84,10 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 
 		this.hp = this.condition.health;
 		this.mp = this.condition.mana;
-		//var initialPosition = map.findNearestFeature(2,0,0);
+		var initialPosition = map.findNearestFeature(1,0,0);
 		var pos = {
-			x: 0,
-			y: 0,
+			x: initialPosition.x,
+			y: initialPosition.y,
 			move: false
 		};
 		
