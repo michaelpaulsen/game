@@ -3,18 +3,20 @@ define([
 	'app/Screen',
 	'app/Map',
 	'app/Item',
-	'app/battle'
+	//'app/battle'
 	], function (Input, Screen, Map, Item,battle) {
 	//console.log(item);
 	//var item = item;
-			var seed = Math.round(Math.random()*Math.pow(10,10));
+			//var seed = Math.round(Math.random()*Math.pow(10,10));
 	var Player = function () {
-	
+		
 		var input = Input.getInstance();
 		var screen = Screen.getInstance();
 		var map = Map.getInstance();
 		var item = Item.getInstance();
-
+		
+		this.backpack = [];// backpack where you hold all your stuff
+		this.moves = []; // battle moves that your player can preform
 		this.stat = {
 			name: 'Michael',
 			race: "Human",
@@ -23,8 +25,7 @@ define([
 			steps: 0
 			
 		};
-		this.backpack = [];// backpack where you hold all your stuff
-		this.moves = []; // battle moves that your player can preform
+		
 /*
 strength - hit power, weight carrying ability
 endurance - exersion over time - (maybe options to enable power attacks/spells (wears off slower for high endurance)
@@ -52,8 +53,8 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 				rest:10
 			},
 			level:{
-				current:0;
-				next:1000; 
+				current:0,
+				next:1000
 			}
 
 		};
@@ -90,7 +91,12 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 			y: 0,
 			move: false
 		};
-		
+		let cords = map.findLand(pos.x,pos.y);
+		pos.x = cords.x;
+		console.log(cords)
+		pos.y = cords.y;
+		console.log(pos);			
+
 
 		this.pos = pos;
 
@@ -103,33 +109,16 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 			}
 		};
 
+		
+						
 		var checkInput = function () {
 			/** movment code*/
 	
 			var blockIsInvalid = ((getTileIdByPlayerPos(0,0) == "tile-water") || (getTileIdByPlayerPos(0,0) == "tile-mountain"));
-			var upIsVaild = (getTileIdByPlayerPos(0,-1) != "tile-water") && (getTileIdByPlayerPos(0,-1) != "tile-mountain");
-			var leftIsVaild = (getTileIdByPlayerPos(-1,0) != "tile-water") && (getTileIdByPlayerPos(-1,0) != "tile-mountain");
-			var downIsVaild = (getTileIdByPlayerPos(0,1) != "tile-water") && (getTileIdByPlayerPos(0,1) != "tile-mountain");
+			var upIsVaild =    (getTileIdByPlayerPos(0,-1) != "tile-water") && (getTileIdByPlayerPos(0,-1) != "tile-mountain");
+			var leftIsVaild =  (getTileIdByPlayerPos(-1,0) != "tile-water") && (getTileIdByPlayerPos(-1,0) != "tile-mountain");
+			var downIsVaild =  (getTileIdByPlayerPos(0,1) != "tile-water") && (getTileIdByPlayerPos(0,1) != "tile-mountain");
 			var rightIsVaild = (getTileIdByPlayerPos(1,0) != "tile-water") && (getTileIdByPlayerPos(1,0) != "tile-mountain");
-			/*alert("up: " + upIsVaild + " left: " + leftIsVaild + " down: " + downIsVaild + " right: " + rightIsVaild); 
-			console.log( input.keys.down );
-			console.log( input.keys.last );
-			*/
-			//console.log( input.keys.down[ 65 ] && input.keys.last === 65 );
-			//console.log( input.keys.down[ 65 ] && input.keys.last === 65 );
-			/*
-			if(blockIsInvalid){
-				location.search = "?seed=" + seed;
-				// sets tje search val to the current random seed and indonin so reloads the page makeing a new random seed ;)
-				//seed++;
-				blockIsInvalid = (getTileIdByPlayerPos(0,0) == "tile-water") && (getTileIdByPlayerPos(0,0) == "tile-mountain");
-			}
-			*/
-			//if(this.stat.steps >= 100){
-				//this.stat.steps -= 100;
-				//screen.console("info", this.stat.steps);
-				//screen.console("info", this.stat.steps);
-			//}
 			if ( ( input.keys.down[ 38 ] && input.keys.last === 38 ) || /** if the key is  (w||W||^)*/
 				( input.keys.down[ 87 ] && input.keys.last === 87 )){
 				if ( upIsVaild ) {/** and the block one up from you is valid then move up*/
@@ -184,24 +173,13 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 			if ( pos.move )
 			{
 				pos.move = false;
-				//map.setPlayerPosition( pos.x, pos.y );
 				screen.drawMap();
 				screen.debug( pos.x, pos.y );
 			}
 		};
-/*<<<<<<< HEAD
-	
-		var inputInt = setInterval(
-=======
-		console.log(
-				'player speed delay',
-				300 * ( Math.pow( .95, this.attribute.speed ) + .2 )
-		);
-*/
 		var inputInt =
 
 			setInterval(
-//>>>>>>> 0012546a7a410dff8129fa918d483409dae1340b
 				checkInput,
 				300 * ( Math.pow( .95, this.attribute.speed ) + .2 )
 			);

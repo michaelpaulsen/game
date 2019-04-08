@@ -21,33 +21,38 @@ define([
 			this.max = {};
 
 	
-		this.findLand = function( x, y )
-{
-
-
-			while ( this.blocks[y][x] === 0 ){
-
+		this.findLand = function( x, y ) {
+			/**
+			* we could have a filter pramiter that is an array 
+			* then do some thing linke while(!walkables.includes(this.blocks[x][y])) 
+			*/
+			while ( this.blocks[x][y] === 0 ){
 				var direction = Math.floor( this.generator.random() * 4 );
-
-				switch (direction) {
 				
-				case 0: y-=1; break;
+				switch (direction) {
 					
-				case 1: y+=1; break;
+					case 0: y-=1; break;
+						
+					case 1: y+=1; break;
 
-				case 2: x-=1; break;
-				case 3: x+=1; break;
+					case 2: x-=1; break;
+					
+					case 3: x+=1; break;
+				}
 
+				if (x<0) { x=this.max.x-1; }
+				if (x>this.max.x-1) { x=0; }
+				if (y<0) { y=this.max.y-1; }
+				if (y>this.max.y-1) { y=0; }
+				//console.log( {x, y, bId:this.blocks[x][y]} );
+				if(this.blocks[x][y] !== 0){
+					return {
+						x:x,
+						y:y
+					};
+				}
 			}
-
-			if (x<0) { x=this.max.x-1; }
-
-			if (x>this.max.x-1) { x=0; }
-			if (y<0) { y=this.max.y-1; }
-			if (y>this.max.y-1) { y=0; }
-
-		}
-	};
+		};
 
 		
 		this.getNearbyTileId = function( objCoord, objDirection ) {
