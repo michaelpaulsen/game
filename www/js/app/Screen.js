@@ -92,7 +92,7 @@ define(["jquery"], function($) {
 			{
 				var player = arrPlayers[ playerIdx ];
 				var hp = 100 *(player.condition.health / player.attribute.vitality.maxHp);
-				var mp =  100 * (player.condition.mana / player.attribute.wisdom);
+				var mp =  100 * (player.condition.mana / player.attribute.wisdom.mana);
 				var h = 12.5;
 				var playerDiv = $( '<div id="player' + playerIdx + '"></div>' );
 				$( playerDiv ).append( '<div class="player-name">' + player.stat.name + '</div>' );/* displays the name of the player*/
