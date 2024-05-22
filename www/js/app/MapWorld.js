@@ -25,7 +25,6 @@ define([
 				var row = [];
 				for (var x = 0; x < this.map.max.x; x+=1 )
 				{
-					 //row.push(  Math.floor( this.map.generator.random() * this.tiles.length ) );
 					 row.push( 0 );
 				}
 				this.blocks.push( row );
@@ -45,10 +44,6 @@ define([
 				this.map.generator.blob( this.map, genCoord.x, genCoord.y, blobSize/4, 2 ); // forest
 				this.map.generator.blob( this.map, genCoord.x, genCoord.y, blobSize/12, 3 ); // mountain
 				this.map.generator.blob( this.map, genCoord.x, genCoord.y, 1, 4 ); // cave
-// need to make sure x / y coordinates are within min/max
-//				this.map.generator.blob( this.map, genCoord.x+i, genCoord.y+i, 1, 5 ); // light houses?
-//				this.map.generator.blob( this.map, genCoord.x+10, genCoord.y+5, 1, 6 ); // towns
-//				this.map.generator.blob( this.map, genCoord.x+7, genCoord.y+2, 2, 7 ); // temple
 	this.map.generator.blob( this.map, genCoord.x, genCoord.y, 15, 8 ); /*monsters*/		}
 
 			// add mountains

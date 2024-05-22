@@ -13,15 +13,10 @@ define([
 
 	var world = new MapWorld( parseInt( util.getParam( 'seed' ) ) );
 	screen.addMap( world.map );
-
 	var player = new Player();
 	screen.addPlayer( player );
-//    screen.addNPC( {} );
-
 	screen.drawMap();
 	screen.drawPlayers();
-
-
 	screen.info( 'seed', world.seed );
 
 });

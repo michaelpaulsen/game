@@ -2,25 +2,21 @@ define([], function() {
 
 	var Generator = function(seed)
 	{
-		if ( !seed || isNaN( seed ) || typeof( seed ) !== "number" )
-		{
+		if ( !seed || isNaN( seed ) || typeof( seed ) !== "number" ) {
 			seed = Math.floor( Math.random() * 10000 );
 		}
 		this.seed = seed;
 
-		this.random = function()
-		{
+		this.random = function(){
 			var x = Math.sin(seed+=1) * 10000;
 			return x - Math.floor(x);
 		};
 
-		this.vary = function( size, variance )
-		{
+		this.vary = function( size, variance ) {
 			return size + (Math.floor( this.random() * variance*2 ) - variance);
 		};
 
-		this.randomAdjacent = function( objMap, x, y )
-		{
+		this.randomAdjacent = function( objMap, x, y ) {
 			var direction = Math.floor( this.random() * 4 );
 			switch (direction) {
 				case 0: y-=1; break;

@@ -3,18 +3,13 @@ define([
 	'app/Screen',
 	'app/Map',
 	'app/Item',
-	//'app/battle'
 	], function (Input, Screen, Map, Item,battle) {
-	//console.log(item);
-	//var item = item;
-			//var seed = Math.round(Math.random()*Math.pow(10,10));
 	var Player = function () {
-		
 		var input = Input.getInstance();
 		var screen = Screen.getInstance();
 		var map = Map.getInstance();
 		var item = Item.getInstance();
-		
+
 		this.backpack = [];// backpack where you hold all your stuff
 		this.moves = []; // battle moves that your player can preform
 		this.stat = {
@@ -85,7 +80,6 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 
 		this.hp = this.condition.health;
 		this.mp = this.condition.mana;
-		//var initialPosition = map.findNearestFeature(2,0,0);
 		var pos = {
 			x: 0,
 			y: 0,
@@ -96,8 +90,6 @@ wisdom - total magic, object identification/appraisal, rate of magic regeneratio
 		console.log(cords)
 		pos.y = cords.y;
 		console.log(pos);			
-
-
 		this.pos = pos;
 
 		var getTileIdByPlayerPos = function(rx,ry){

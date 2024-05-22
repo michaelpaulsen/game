@@ -98,7 +98,6 @@ define(["jquery"], function($) {
 				$( playerDiv ).append( '<div class="player-name">' + player.stat.name + '</div>' );/* displays the name of the player*/
 				$( playerDiv ).append( '<div class="max-hp">'+/*health bar out line*/'<div class="current-hp" style="width:'/*health bar */ + hp + '%;"></div><div class="current-hp-text">'+hp+'%</div></div>' );
 				$( playerDiv ).append( '<div class="max-mp">'/*magic bar out line*/+'<div class="current-mp" style="width:'/*magic bar*/ +mp+ '%;"></div><div class="current-mp-text">'+mp+'%</div></div>' );
-//<<<<<<< HEAD
 				for(var s = 0; s < player.backpack.length; s++){
 					if(player.backpack[s].amount>1){
 						$( playerDiv ).append( '<div class="item'+player.backpack[s].name+'" style ="  display:inline-block;">' + player.backpack[s].name + ' x:' + player.backpack[s].amount  + '<br> <div class = "'+ (s + 1) + ' " style="background-image:'+player.backpack[s].src + '; width:'+h+'px; height:'+h+'px; background-size:100%; background-repeat: no-repeat; display:inline-block;"></div></div>' );
@@ -106,9 +105,6 @@ define(["jquery"], function($) {
 						$( playerDiv ).append( '<div class="item'+player.backpack[s].name+'" style =" display:none;  ">' + player.backpack[s].name + '<br> <div class = "'+ (s + 1) + ' " style="background-image:'+player.backpack[s].src + '; width:'+h+'px; height:'+h+'px; background-size:100%; background-repeat: no-repeat; display:inline-block;"></div></div>' );
 					}
 				}
-//=======
-
-//>>>>>>> 0012546a7a410dff8129fa918d483409dae1340b
 				$( '#playerBar' ).append( playerDiv );
 			}
 		};
@@ -140,31 +136,6 @@ define(["jquery"], function($) {
 					$( '#mapGrid .block_' + objScreenCoord.x + 'x' + objScreenCoord.y );
 				$block.removeClass( removeTile );
 				$block.addClass( 'tile-' + objMap.tiles[ tileId ] );
-
-				// add layers
-				// TBD - see about appending divs instead of adding classes to main cell
-				/*
-				if ( tileId === 0 )
-				{
-					$block.removeClass( removeShore );
-					if ( objMap.getNearbyTileId( mapCoord, { x: 0, y: 1 } ) > 0 ) {
-						$block.addClass( 'shore-s' );
-					}
-					if ( objMap.getNearbyTileId( mapCoord, { x: 0, y: -1 } ) > 0 ) {
-						$block.addClass( 'shore-n' );
-					}
-					if ( objMap.getNearbyTileId( mapCoord, { x: -1, y: 0 } ) > 0 ) {
-						$block.addClass( 'shore-w' );
-					}
-					if ( objMap.getNearbyTileId( mapCoord, { x: 1, y: 0 } ) > 0 ) {
-						$block.addClass( 'shore-e' );
-					}
-				}
-
-				*/
-				/*
-				$block.html( mapCoord.x + ',' + mapCoord.y );
-				*/
 			}
 
 		};
@@ -222,7 +193,6 @@ define(["jquery"], function($) {
 			$( msgDiv ).addClass( type ).html( msg );
 			
 			$('#gameConsole').append( msgDiv ).scrollTop( $('#gameConsole')[0].scrollHeight );
-			/*$('#gameConsole').empty().append( msgDiv );*/
 
 		}
 		this.debug = function()

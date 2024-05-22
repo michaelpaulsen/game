@@ -72,7 +72,6 @@ var World = function(seed)
 			var row = new Array();
 			for (var x = 0; x < this.max.x; x++ )
 			{
-				 //row.push(  Math.floor( random() * this.tiles.length ) );
 				 row.push( 0 );
 			}
 			this.blocks.push( row );
